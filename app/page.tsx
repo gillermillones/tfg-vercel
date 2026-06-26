@@ -1,12 +1,17 @@
+import React from 'react';
 import LikeButton from './like-button';
- 
-function Header({ title }) {
+
+interface HeaderProps {
+  title?: string;
+}
+
+function Header({ title }: HeaderProps): React.ReactElement {
   return <h1>{title ? title : 'Default title'}</h1>;
 }
- 
-export default function HomePage() {
-  const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton'];
- 
+
+export default function HomePage(): React.ReactElement {
+  const names: string[] = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton'];
+
   return (
     <div>
       <Header title="Develop. Preview. Ship." />
@@ -15,7 +20,7 @@ export default function HomePage() {
           <li key={name}>{name}</li>
         ))}
       </ul>
-      <LikeButton/>
+      <LikeButton />
     </div>
   );
 }
