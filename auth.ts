@@ -5,10 +5,13 @@ import { z } from 'zod';
 import type { User } from '@/app/lib/definitions';
 import bcrypt from 'bcrypt';
 import postgres from 'postgres';
+import { getIronSession, IronSession } from "iron-session";
+import { cookies } from "next/headers";
+import { defaultSession, sessionOptions, SessionData } from "@/app/lib/session";
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
  
-async function getUser(email: string): Promise<User | undefined> {
+export async function getUser(email: string): Promise<User | undefined> {
   try {
     const user = await sql<User[]>`SELECT * FROM users WHERE email=${email}`;
     return user[0];
@@ -27,11 +30,27 @@ export const { auth, signIn, signOut } = NextAuth({
             .safeParse(credentials);
 
             if (parsedCredentials.success) {
-                const { email, password } = parsedCredentials.data;
-                const user = await getUser(email);
-                if (!user) return null;
-                const passwordsMatch = await bcrypt.compare(password, user.password);
-                if (passwordsMatch) return user;
+              const { email, password } = parsedCredentials.data;
+              const user = await getUser(email);
+              const cookieStore = await cookies();
+              const session = await getIronSession<SessionData>(
+                  cookieStore,
+                  sessionOptions,
+              );
+              if (!user){
+                session.isLoggedIn = defaultSession.isLoggedIn;
+                session.userId = defaultSession.userId;
+                session.email = defaultSession.email;
+                return null;
+              } 
+              const passwordsMatch = await bcrypt.compare(password, user.password);
+              if (passwordsMatch){
+                session.isLoggedIn = true;
+                session.userId = user.id;
+                session.email = user.email;
+                await session.save();
+                return user;
+              } 
             }
     
             console.log('Invalid credentials');

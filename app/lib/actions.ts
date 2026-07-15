@@ -7,6 +7,9 @@ import { redirect } from 'next/navigation';
 import { signIn } from '@/auth';
 import { AuthError } from 'next-auth';
 import bcrypt from 'bcrypt';
+import { getIronSession, IronSession } from "iron-session";
+import { cookies } from "next/headers";
+import { sessionOptions, SessionData } from "@/app/lib/session";
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 const FormSchema = z.object({
@@ -126,6 +129,16 @@ export async function deleteInvoice(id: string) {
     }
 
   revalidatePath('/dashboard/invoices');
+}
+
+export async function getSession() {
+    const cookieStore = await cookies();
+    const session = await getIronSession<SessionData>(
+        cookieStore,
+        sessionOptions,
+    );
+
+    return session;
 }
 
 export async function authenticate(prevState: string | undefined, formData: FormData) {

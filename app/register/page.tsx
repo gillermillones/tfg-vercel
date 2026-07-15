@@ -18,9 +18,9 @@ export default function RegisterPage() {
         </Suspense>
         <Link
             href="/login"
-            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
+            className="group flex items-center w-full self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
           >
-            <span>Already signed up? Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
+            <span>Already signed up? Log in</span> <ArrowRightIcon className="h-5 w-5 ml-2 md:w-6 transition delay-150 duration-300 ease-in-out group-hover:translate-x-24" />
           </Link>
       </div>
     </main>
