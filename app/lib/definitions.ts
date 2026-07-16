@@ -86,3 +86,9 @@ export type InvoiceForm = {
   amount: number;
   status: 'pending' | 'paid';
 };
+
+export type Friendship = {
+  id: string;
+  userIdSource: string;
+  userIdTarget: string;
+};

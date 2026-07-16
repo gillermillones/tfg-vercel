@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   title: {
     template: '%s | Metadocen',
     default: 'Metadocen',
-    creator: 'Guillermo Colorado',
   },
+  creator: 'Guillermo Colorado',
   description: 'Get your teaching resources metadata right away in a few steps',
   metadataBase: new URL('https://next-learn-dashboard.vercel.sh'),
 };

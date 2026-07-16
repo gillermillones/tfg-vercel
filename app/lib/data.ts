@@ -6,6 +6,7 @@ import {
   InvoicesTable,
   LatestInvoiceRaw,
   Revenue,
+  Friendship,
 } from './definitions';
 import { formatCurrency } from './utils';
 
@@ -208,5 +209,23 @@ export async function fetchFilteredCustomers(query: string) {
   } catch (err) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch customer table.');
+  }
+}
+
+export async function fetchFriends(id: string) {
+  try {
+    const friends = await sql<Friendship[]>`
+      SELECT
+        friends.id,
+        friends.userIdSource,
+        friends.userIdTarget
+      FROM friends
+      WHERE friends.userIdSource = ${id};
+    `;
+
+    return friends;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch friends.');
   }
 }
