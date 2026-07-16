@@ -21,6 +21,16 @@ export async function getUser(email: string): Promise<User | undefined> {
   }
 }
 
+export async function getUserById(id: string): Promise<User | undefined> {
+  try {
+    const user = await sql<User[]>`SELECT * FROM users WHERE id=${id}`;
+    return user[0];
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    throw new Error('Failed to fetch user.');
+  }
+}
+
 export const { auth, signIn, signOut } = NextAuth({
     ...authConfig,
     providers: [Credentials({
