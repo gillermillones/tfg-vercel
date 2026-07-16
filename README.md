@@ -3,4 +3,9 @@ bcrypt
 iron-session
 heroicon
 next.js
+next-auth
 tailwind
+neon
+postgres
+vercel
+zod
