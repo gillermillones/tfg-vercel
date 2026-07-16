@@ -1,6 +1,7 @@
 import { getSession } from '@/app/lib/actions';
 import { Metadata } from 'next';
 import { getUserById } from '@/auth';
+import { notFound } from 'next/navigation';
 
 export const metadata: Metadata = {
   title: 'Profile',
