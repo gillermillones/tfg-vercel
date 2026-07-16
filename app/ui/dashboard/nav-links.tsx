@@ -4,21 +4,21 @@ import {
   UserIcon,
   HomeIcon,
   DocumentDuplicateIcon,
+  ClipboardDocumentListIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { getSession } from '@/app/lib/actions';
 import clsx from 'clsx';
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
+const session = await getSession();
 const links = [
   { name: 'Home', href: '/dashboard', icon: HomeIcon },
-  {
-    name: 'Invoices',
-    href: '/dashboard/invoices',
-    icon: DocumentDuplicateIcon,
-  },
-  { name: 'Profile', href: '/dashboard/profile', icon: UserIcon },
+  { name: 'Invoices', href: '/dashboard/invoices', icon: DocumentDuplicateIcon },
+  { name: 'Profile', href: '/dashboard/profile/' + session.userId, icon: UserIcon },
+  { name: 'About us', href: '/about', icon: ClipboardDocumentListIcon },
 ];
 
 export default function NavLinks() {

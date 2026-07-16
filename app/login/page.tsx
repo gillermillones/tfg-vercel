@@ -3,7 +3,13 @@ import LoginForm from '@/app/ui/login-form';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { Suspense } from 'react';
- 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Login',
+};
+
+
 export default function LoginPage() {
   return (
     <main className="flex items-center justify-center md:h-screen">
