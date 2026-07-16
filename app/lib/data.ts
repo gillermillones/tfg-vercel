@@ -218,7 +218,14 @@ export async function fetchFriends(id: string) {
       SELECT u.*
       FROM friends f
       JOIN users u ON u.id = f."userIdTarget"
-      WHERE f."userIdSource" = ${id};
+      WHERE f."userIdSource" = ${id}
+      AND f.accepted = true
+      UNION
+      SELECT u.*
+      FROM friends f
+      JOIN users u ON u.id = f."userIdSource"
+      WHERE f."userIdTarget" = ${id}
+      AND f.accepted = true
     `;
 
     return friends;
