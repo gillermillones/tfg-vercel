@@ -6,7 +6,7 @@ import {
   InvoicesTable,
   LatestInvoiceRaw,
   Revenue,
-  Friendship,
+  User,
 } from './definitions';
 import { formatCurrency } from './utils';
 
@@ -214,13 +214,11 @@ export async function fetchFilteredCustomers(query: string) {
 
 export async function fetchFriends(id: string) {
   try {
-    const friends = await sql<Friendship[]>`
-      SELECT
-        friends.id,
-        friends.userIdSource,
-        friends.userIdTarget
-      FROM friends
-      WHERE friends.userIdSource = ${id};
+    const friends = await sql<User[]>`
+      SELECT u.*
+      FROM friends f
+      JOIN users u ON u.id = f."userIdTarget"
+      WHERE f."userIdSource" = ${id};
     `;
 
     return friends;

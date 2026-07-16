@@ -4,6 +4,7 @@ import { getUserById } from '@/auth';
 import { notFound, forbidden } from 'next/navigation';
 import { lusitana } from '@/app/ui/fonts';
 import { fetchFriends } from '@/app/lib/data';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Profile',
@@ -31,12 +32,15 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
           <h1>User ID:{session.userId}</h1>
           <h1>User Friends:</h1>
           {friends.map((friend) => (
-            <p>{await getUserById(friend.userIdTarget)?.name}</p>
+            <Link href={`/dashboard/profile/${friend.id}`}>
+              <h1>{friend.name}</h1>
+            </Link>
           ))}
         </div>
       </div>
     );
   }
+
   return (
     <div className="w-full">
       <div className="flex w-full items-center justify-between">
