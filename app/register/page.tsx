@@ -1,4 +1,4 @@
-import AcmeLogo from '@/app/ui/acme-logo';
+import AcmeLogo from '@/app/ui/metadocen-logo';
 import RegisterForm from '@/app/ui/register-form';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
