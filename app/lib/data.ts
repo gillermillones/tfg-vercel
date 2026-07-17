@@ -234,3 +234,26 @@ export async function fetchFriends(id: string) {
     throw new Error('Failed to fetch friends.');
   }
 }
+
+export async function fetchFriendRequests(id: string) {
+  try {
+    const friends = await sql<User[]>`
+      SELECT u.*
+      FROM friends f
+      JOIN users u ON u.id = f."userIdTarget"
+      WHERE f."userIdSource" = ${id}
+      AND f.accepted = false
+      UNION
+      SELECT u.*
+      FROM friends f
+      JOIN users u ON u.id = f."userIdSource"
+      WHERE f."userIdTarget" = ${id}
+      AND f.accepted = false
+    `;
+
+    return friends;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch friend requests.');
+  }
+}

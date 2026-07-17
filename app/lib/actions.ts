@@ -141,6 +141,55 @@ export async function getSession() {
     return session;
 }
 
+export async function removeFriend(id: string) {
+    const session = await getSession();
+
+    try{
+        await sql`
+            DELETE FROM friends 
+            WHERE userIdSource = ${session.userId} AND userIdTarget = ${id}
+        `;
+    }catch(error){
+        console.error(error);
+    }
+
+  revalidatePath('/dashboard/profile/' + session.userId);
+}
+
+export async function acceptFriend(id: string) {
+    const session = await getSession();
+
+    try{
+        await sql`
+            UPDATE friends
+            SET accepted = ${true}
+            WHERE userIdSource = ${id} AND userIdTarget = ${session.userId}
+        `;
+    }catch(error){
+        console.error(error);
+    }
+
+  revalidatePath('/dashboard/profile/' + session.userId);
+}
+
+export async function addFriend(id: string | undefined) {
+    const session = await getSession();
+    if(id != undefined){
+        try{
+            await sql`
+                INSERT INTO friends (userIdSource, userIdTarget, accepted)
+                VALUES (${session.userId}, ${id}, ${false})
+            `;
+        }catch(error){
+            console.error(error);
+        }
+    }else{
+        console.error("404 Id not found");
+    }
+
+  revalidatePath('/dashboard/profile/' + session.userId);
+}
+
 export async function authenticate(prevState: string | undefined, formData: FormData) {
   try {
     await signIn('credentials', formData);

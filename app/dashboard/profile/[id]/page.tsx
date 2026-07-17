@@ -3,8 +3,10 @@ import { Metadata } from 'next';
 import { getUserById } from '@/auth';
 import { notFound, forbidden } from 'next/navigation';
 import { lusitana } from '@/app/ui/fonts';
-import { fetchFriends } from '@/app/lib/data';
-import Link from 'next/link';
+import { Suspense } from 'react';
+import { FriendListSkeleton } from '@/app/ui/skeletons';
+import { AddFriend } from '@/app/ui/friends/buttons';
+import FriendList from '@/app/ui/dashboard/friend-list';
 
 export const metadata: Metadata = {
   title: 'Profile',
@@ -20,22 +22,21 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
   const session = await getSession();
   
   if(session.userId.localeCompare(user?.id) == 0){
-    const friends = await fetchFriends(session.userId);
-
     return (
       <div className="w-full">
         <div className="flex w-full items-center justify-between">
           <h1 className={`${lusitana.className} text-2xl`}>Your Profile Page</h1>
         </div>
         <div>
-          <h1>Email: {session.email}</h1>
-          <h1>User ID:{session.userId}</h1>
-          <h1>User Friends:</h1>
-          {friends.map((friend) => (
-            <Link href={`/dashboard/profile/${friend.id}`}>
-              <h1>{friend.name}</h1>
-            </Link>
-          ))}
+          <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
+            <div>
+              <h1>Email: {session.email}</h1>
+              <h1>User ID:{session.userId}</h1>
+            </div>
+            <Suspense fallback={<FriendListSkeleton />}>
+              <FriendList id={session.userId}/>
+            </Suspense>
+          </div>
         </div>
       </div>
     );
@@ -49,6 +50,11 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
       <div>
         <h1>Email: {user?.email}</h1>
         <h1>User ID:{user?.id}</h1>
+      </div>
+      <div className="flex w-full items-center justify-between pt-4">
+        <div className="flex justify-end gap-2">
+          <AddFriend id={user?.id} />
+        </div>
       </div>
     </div>
   );
