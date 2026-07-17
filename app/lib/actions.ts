@@ -140,7 +140,7 @@ export async function getSession() {
 
     return session;
 }
-
+/*
 export async function removeFriend(id: string) {
     const session = await getSession();
     console.log("removeFriend boton");
@@ -154,7 +154,14 @@ export async function removeFriend(id: string) {
     }
 
   revalidatePath('/dashboard/profile/' + session.userId);
+}*/
+
+export async function removeFriend(id: string) {
+    throw new Error(
+        `acceptFriend llamada con id=${id}`
+    );
 }
+
 
 export async function acceptFriend(id: string) {
     const session = await getSession();
