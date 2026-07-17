@@ -140,10 +140,14 @@ export async function getSession() {
 
     return session;
 }
-/*
+
 export async function removeFriend(id: string) {
     const session = await getSession();
-    console.log("removeFriend boton");
+    
+    if (!session.userId) {
+        throw new Error("session.userId es undefined");
+    }
+
     try{
         await sql`
             DELETE FROM friends 
@@ -154,14 +158,7 @@ export async function removeFriend(id: string) {
     }
 
   revalidatePath('/dashboard/profile/' + session.userId);
-}*/
-
-export async function removeFriend(id: string) {
-    throw new Error(
-        `acceptFriend llamada con id=${id}`
-    );
 }
-
 
 export async function acceptFriend(id: string) {
     const session = await getSession();
@@ -169,7 +166,7 @@ export async function acceptFriend(id: string) {
     try{
         await sql`
             UPDATE friends
-            SET accepted = ${true}
+            SET accepted = true
             WHERE userIdSource = ${id} AND userIdTarget = ${session.userId}
         `;
     }catch(error){
@@ -180,13 +177,13 @@ export async function acceptFriend(id: string) {
 }
 
 export async function addFriend(id: string | undefined) {
-    console.log("addFriend ejecuta");
     const session = await getSession();
+
     if(id != undefined){
         try{
             await sql`
                 INSERT INTO friends (userIdSource, userIdTarget, accepted)
-                VALUES (${session.userId}, ${id}, ${false})
+                VALUES (${session.userId}, ${id}, false)
             `;
         }catch(error){
             console.error(error);

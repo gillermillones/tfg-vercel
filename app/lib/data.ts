@@ -240,12 +240,6 @@ export async function fetchFriendRequests(id: string) {
     const friends = await sql<User[]>`
       SELECT u.*
       FROM friends f
-      JOIN users u ON u.id = f."userIdTarget"
-      WHERE f."userIdSource" = ${id}
-      AND f.accepted = false
-      UNION
-      SELECT u.*
-      FROM friends f
       JOIN users u ON u.id = f."userIdSource"
       WHERE f."userIdTarget" = ${id}
       AND f.accepted = false
