@@ -92,3 +92,30 @@ export type Friendship = {
   userIdSource: string;
   userIdTarget: string;
 };
+
+export type Values = {
+  description: number;
+  quality: number;
+  capacity: number;
+  adaptable: number;
+  interaction: number;
+  motivation: number;
+  design: number;
+  reusable: number;
+  portable: number;
+  toughness: number;
+  structure: number;
+  navigation: number;
+  operable: number;
+  av_accessible: number;
+  text_accessible: number;
+}
+
+export type Data = {
+  id: string;
+  user: string;
+  name: string;
+  extension: string;
+  desc: string;
+  values: Values;
+}

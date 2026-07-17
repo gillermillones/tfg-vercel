@@ -141,15 +141,18 @@ export async function getSession() {
     return session;
 }
 
-export async function removeFriend(id: string, session: SessionData) {
+export async function removeFriend(id: string | undefined) {
+    const session = await getSession();
 
-    try{
-        await sql`
-            DELETE FROM friends 
-            WHERE "userIdSource" = ${session.userId} AND "userIdTarget" = ${id}
-        `;
-    }catch(error){
-        console.error(error);
+    if(id != undefined){
+        try{
+            await sql`
+                DELETE FROM friends 
+                WHERE "userIdSource" = ${session.userId} AND "userIdTarget" = ${id}
+            `;
+        }catch(error){
+            console.error(error);
+        }
     }
 
   revalidatePath('/dashboard/profile/' + session.userId);
@@ -162,6 +165,21 @@ export async function acceptFriend(id: string) {
         await sql`
             UPDATE friends
             SET accepted = true
+            WHERE "userIdSource" = ${id} AND "userIdTarget" = ${session.userId}
+        `;
+    }catch(error){
+        console.error(error);
+    }
+
+  revalidatePath('/dashboard/profile/' + session.userId);
+}
+
+export async function dismissFriend(id: string) {
+    const session = await getSession();
+
+    try{
+        await sql`
+            DELETE FROM friends 
             WHERE "userIdSource" = ${id} AND "userIdTarget" = ${session.userId}
         `;
     }catch(error){

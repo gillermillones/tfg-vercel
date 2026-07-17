@@ -5,8 +5,9 @@ import { notFound, forbidden } from 'next/navigation';
 import { lusitana } from '@/app/ui/fonts';
 import { Suspense } from 'react';
 import { FriendListSkeleton } from '@/app/ui/skeletons';
-import { AddFriend } from '@/app/ui/friends/buttons';
+import { AddFriend, RemoveFriend } from '@/app/ui/friends/buttons';
 import FriendList from '@/app/ui/dashboard/friend-list';
+import { areWeFriends } from '@/app/lib/data';
 
 export const metadata: Metadata = {
   title: 'Profile',
@@ -20,6 +21,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
     notFound();
   }
   const session = await getSession();
+  const friendship = await areWeFriends(session.userId, id);
   
   if(session.userId.localeCompare(user?.id) == 0){
     return (
@@ -36,6 +38,23 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
             <Suspense fallback={<FriendListSkeleton />}>
               <FriendList id={session.userId}/>
             </Suspense>
+          </div>
+        </div>
+      </div>
+    );
+  }else if(friendship == true){
+    return (
+      <div className="w-full">
+        <div className="flex w-full items-center justify-between">
+          <h1 className={`${lusitana.className} text-2xl`}>{user?.name}'s Profile Page</h1>
+        </div>
+        <div>
+          <h1>Email: {user?.email}</h1>
+          <h1>User ID:{user?.id}</h1>
+        </div>
+        <div className="flex w-full items-center justify-between pt-4">
+          <div className="flex justify-end gap-2">
+            <RemoveFriend id={user?.id} />
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { RemoveFriend, AcceptFriend } from '@/app/ui/friends/buttons';
+import { RemoveFriend, AcceptFriend, DismissFriend } from '@/app/ui/friends/buttons';
 import Image from 'next/image';
 import Link from 'next/link';
 import { lusitana } from '@/app/ui/fonts';
@@ -54,6 +54,7 @@ export default async function FriendList({ id }: { id: string }) {
                             <div className="flex w-full items-center justify-between pt-4">
                                 <div className="flex justify-end gap-2">
                                     <AcceptFriend id={friend.id} />
+                                    <DismissFriend id={friend.id} />
                                 </div>
                             </div>
                         </div>

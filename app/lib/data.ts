@@ -251,3 +251,26 @@ export async function fetchFriendRequests(id: string) {
     throw new Error('Failed to fetch friend requests.');
   }
 }
+
+export async function areWeFriends(id1: string, id2: string) {
+  try {
+    const result = await sql<{ exists: boolean }[]>`
+      SELECT EXISTS(
+        SELECT 1
+        FROM friends f
+        WHERE (
+            (f."userIdTarget" = ${id1}
+            AND f."userIdSource" = ${id2})
+          OR
+            (f."userIdTarget" = ${id2}
+            AND f."userIdSource" = ${id1})
+        )AND f.accepted = true
+      )as exists
+    `;
+
+    return result[0].exists;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to prove friendship.');
+  }
+}

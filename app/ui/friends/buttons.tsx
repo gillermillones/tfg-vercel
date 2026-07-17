@@ -1,5 +1,5 @@
 import { PlusIcon, TrashIcon, CheckIcon } from '@heroicons/react/24/outline';
-import { removeFriend, addFriend, acceptFriend, getSession } from '@/app/lib/actions';
+import { removeFriend, addFriend, acceptFriend, dismissFriend } from '@/app/lib/actions';
 
 export function AddFriend({ id }: { id: string | undefined}) {
 
@@ -31,13 +31,27 @@ export function AcceptFriend({ id }: { id: string }) {
   );
 }
 
-export function RemoveFriend({ id }: { id: string }) {
+export function RemoveFriend({ id }: { id: string | undefined }) {
     
   return (
     <form action={async () => {
       'use server';
-      const session = await getSession();
-      await removeFriend(id, session);
+      await removeFriend(id);
+    }}>
+      <button type="submit" className="rounded-md border p-2 hover:bg-gray-100">
+        <span className="sr-only">Remove Friend</span>
+        <TrashIcon className="w-4" />
+      </button>
+    </form>
+  );
+}
+
+export function DismissFriend({ id }: { id: string }) {
+    
+  return (
+    <form action={async () => {
+      'use server';
+      await dismissFriend(id);
     }}>
       <button type="submit" className="rounded-md border p-2 hover:bg-gray-100">
         <span className="sr-only">Remove Friend</span>
