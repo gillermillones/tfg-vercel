@@ -2,7 +2,7 @@ import { PlusIcon, TrashIcon, CheckIcon } from '@heroicons/react/24/outline';
 import { removeFriend, addFriend, acceptFriend } from '@/app/lib/actions';
 
 export function AddFriend({ id }: { id: string | undefined}) {
-  
+  console.log("addFriend boton");
     return (
     <form action={async () => {
       'use server';
@@ -32,7 +32,7 @@ export function AcceptFriend({ id }: { id: string }) {
 }
 
 export function RemoveFriend({ id }: { id: string }) {
- 
+ console.log("removeFriend boton");
   return (
     <form action={async () => {
       'use server';

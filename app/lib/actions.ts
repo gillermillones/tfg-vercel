@@ -143,7 +143,7 @@ export async function getSession() {
 
 export async function removeFriend(id: string) {
     const session = await getSession();
-
+    console.log("removeFriend boton");
     try{
         await sql`
             DELETE FROM friends 
@@ -173,6 +173,7 @@ export async function acceptFriend(id: string) {
 }
 
 export async function addFriend(id: string | undefined) {
+    console.log("addFriend ejecuta");
     const session = await getSession();
     if(id != undefined){
         try{
