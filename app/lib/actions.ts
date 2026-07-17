@@ -141,12 +141,7 @@ export async function getSession() {
     return session;
 }
 
-export async function removeFriend(id: string) {
-    const session = await getSession();
-    
-    if (!session.userId) {
-        throw new Error("session.userId es undefined");
-    }
+export async function removeFriend(id: string, session: SessionData) {
 
     try{
         await sql`
@@ -162,7 +157,7 @@ export async function removeFriend(id: string) {
 
 export async function acceptFriend(id: string) {
     const session = await getSession();
-
+    throw new Error(JSON.stringify(session));
     try{
         await sql`
             UPDATE friends
