@@ -1,5 +1,5 @@
 import { PlusIcon, TrashIcon, CheckIcon } from '@heroicons/react/24/outline';
-import { removeFriend, addFriend, acceptFriend } from '@/app/lib/actions';
+import { removeFriend, addFriend, acceptFriend, getSession } from '@/app/lib/actions';
 
 export function AddFriend({ id }: { id: string | undefined}) {
 
