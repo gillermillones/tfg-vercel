@@ -1,5 +1,6 @@
 import { RemoveFriend, AcceptFriend } from '@/app/ui/friends/buttons';
 import Image from 'next/image';
+import Link from 'next/link';
 import { lusitana } from '@/app/ui/fonts';
 import { User } from '@/app/lib/definitions';
 import { fetchFriends, fetchFriendRequests } from '@/app/lib/data';
