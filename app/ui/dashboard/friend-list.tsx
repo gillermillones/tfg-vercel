@@ -4,9 +4,7 @@ import { lusitana } from '@/app/ui/fonts';
 import { User } from '@/app/lib/definitions';
 import { fetchFriends, fetchFriendRequests } from '@/app/lib/data';
 
-export default async function FriendList(props: { params: Promise<{ id: string }> }) {
-    const params = await props.params;
-    const id = params.id;
+export default async function FriendList({ id }: { id: string }) {
     const friends = await fetchFriends(id);
     const friendRequests = await fetchFriendRequests(id);
 
