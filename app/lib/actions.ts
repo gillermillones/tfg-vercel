@@ -146,7 +146,7 @@ export async function removeFriend(id: string, session: SessionData) {
     try{
         await sql`
             DELETE FROM friends 
-            WHERE userIdSource = ${session.userId} AND userIdTarget = ${id}
+            WHERE "userIdSource" = ${session.userId} AND "userIdTarget" = ${id}
         `;
     }catch(error){
         console.error(error);
@@ -157,12 +157,12 @@ export async function removeFriend(id: string, session: SessionData) {
 
 export async function acceptFriend(id: string) {
     const session = await getSession();
-    throw new Error(JSON.stringify(session));
+
     try{
         await sql`
             UPDATE friends
             SET accepted = true
-            WHERE userIdSource = ${id} AND userIdTarget = ${session.userId}
+            WHERE "userIdSource" = ${id} AND "userIdTarget" = ${session.userId}
         `;
     }catch(error){
         console.error(error);
@@ -177,7 +177,7 @@ export async function addFriend(id: string | undefined) {
     if(id != undefined){
         try{
             await sql`
-                INSERT INTO friends (userIdSource, userIdTarget, accepted)
+                INSERT INTO friends ("userIdSource", "userIdTarget", accepted)
                 VALUES (${session.userId}, ${id}, false)
             `;
         }catch(error){
