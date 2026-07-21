@@ -93,7 +93,12 @@ export type Friendship = {
   userIdTarget: string;
 };
 
-export type Values = {
+export type ItemData = {
+  id: string;
+  user: string;
+  name: string;
+  extension: string;
+  desc: string;
   description: number;
   quality: number;
   capacity: number;
@@ -109,13 +114,4 @@ export type Values = {
   operable: number;
   av_accessible: number;
   text_accessible: number;
-}
-
-export type Data = {
-  id: string;
-  user: string;
-  name: string;
-  extension: string;
-  desc: string;
-  values: Values;
 }

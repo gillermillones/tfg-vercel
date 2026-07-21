@@ -2,6 +2,7 @@ import postgres from 'postgres';
 import {
   CustomerField,
   CustomersTableType,
+  ItemData,
   InvoiceForm,
   InvoicesTable,
   LatestInvoiceRaw,
@@ -154,7 +155,7 @@ export async function fetchInvoiceById(id: string) {
       amount: invoice.amount / 100,
     }));
 
-    console.log(invoice); // Invoice is an empty array []
+    console.log(invoice);
     return invoice[0];
   } catch (error) {
     console.error('Database Error:', error);
@@ -272,5 +273,88 @@ export async function areWeFriends(id1: string, id2: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to prove friendship.');
+  }
+}
+
+export async function fetchItemById(id: string) {
+  try {
+    const data = await sql<ItemData[]>`
+      SELECT *
+      FROM data
+      WHERE data.id = ${id};
+    `;
+
+    const item = data.map((e) => ({
+      ...e,
+    }));
+
+    console.log(item);
+    return item[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch item');
+  }
+}
+
+export async function fetchFilteredItems(
+  query: string,
+  currentPage: number,
+) {
+  const offset = (currentPage - 1) * 10;
+
+  try {
+    const data = await sql<ItemData[]>`
+      SELECT *
+      FROM data
+      WHERE
+        data.name::text ILIKE ${`%${query}%`} OR
+        data.extension::text ILIKE ${`%${query}%`} OR
+        data.summary ILIKE ${`%${query}%`}
+      LIMIT 10 OFFSET ${offset}
+    `;
+
+    return data;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch filtered items');
+  }
+}
+
+export async function fetchItemPages(query: string) {
+  try {
+    const data = await sql`
+      SELECT COUNT(*)
+      FROM data
+      WHERE
+        data.name::text ILIKE ${`%${query}%`} OR
+        data.extension::text ILIKE ${`%${query}%`} OR
+        data.summary ILIKE ${`%${query}%`}
+    `;
+
+    const totalPages = Math.ceil(Number(data[0].count) / 10);
+    return totalPages;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch total number of items');
+  }
+}
+
+export async function fetchItemByUserId(id: string) {
+  try {
+    const data = await sql<ItemData[]>`
+      SELECT *
+      FROM data
+      WHERE data.user_id = ${id};
+    `;
+
+    const item = data.map((e) => ({
+      ...e,
+    }));
+
+    console.log(item);
+    return item[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to fetch item');
   }
 }

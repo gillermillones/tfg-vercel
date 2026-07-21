@@ -1,6 +1,5 @@
 'use client';
 
-import { CustomerField } from '@/app/lib/definitions';
 import FormOptions  from '@/app/ui/items/form-options';
 import Link from 'next/link';
 import {

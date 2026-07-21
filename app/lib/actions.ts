@@ -55,6 +55,7 @@ const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const UpdateInvoice = FormSchema.omit({ id: true, date: true });
 const RegisterUser = RegisterFormSchema.omit({ id: true });
 const CreateItem = ItemsFormSchema.omit({ id: true, user: true });
+const UpdateItem = ItemsFormSchema.omit({ id: true, user: true });
 
 export type State = {
   errors?: {
@@ -240,6 +241,69 @@ export async function createItem(prevState: ItemState, formData: FormData) {
 
     revalidatePath('/dashboard/files');
     redirect('/dashboard/files');
+}
+
+export async function updateItem(id: string, prevState: ItemState, formData: FormData) {
+    const validatedFields = UpdateItem.safeParse({
+        name: formData.get('name'),
+        extension: formData.get('extension'),
+        desc: formData.get('desc'),
+        description: formData.get('description'),
+        quality: formData.get('quality'),
+        capacity: formData.get('capacity'),
+        adaptable: formData.get('adaptable'),
+        interaction: formData.get('interaction'),
+        motivation: formData.get('motivation'),
+        design: formData.get('design'),
+        reusable: formData.get('reusable'),
+        portable: formData.get('portable'),
+        toughness: formData.get('toughness'),
+        structure: formData.get('structure'),
+        navigation: formData.get('navigation'),
+        operable: formData.get('operable'),
+        av_accessible: formData.get('av_accessible'),
+        text_accessible: formData.get('text_accessible'),
+    });
+
+    // If form validation fails, return errors early. Otherwise, continue.
+    if (!validatedFields.success) {
+        return {
+            errors: validatedFields.error.flatten().fieldErrors,
+            message: 'Missing Fields. Failed to Update your item.',
+        };
+    }
+
+    const { name, extension, desc, description, quality, capacity, adaptable, interaction, motivation, design, 
+        reusable, portable, toughness, structure, navigation, operable, av_accessible, text_accessible } = validatedFields.data;
+
+    try{  
+        await sql`
+            UPDATE "data"
+            SET name = ${name}, extension = ${extension}, summary = ${desc}, description = ${description}, quality = ${quality}, capacity = ${capacity}, adaptable = ${adaptable},
+                interaction = ${interaction}, motivation = ${motivation}, design = ${design}, reusable = ${reusable}, portable = ${portable}, toughness = ${toughness},
+                structure = ${structure}, navigation = ${navigation}, operable = ${operable}, av_accessible = ${av_accessible}, text_accessible = ${text_accessible}
+            WHERE id = ${id}
+        `;
+    }catch(error){
+        console.error(error);
+
+        return {
+            message: 'Database Error: Failed to Update your file',
+        };
+    }
+ 
+  revalidatePath('/dashboard/files');
+  redirect('/dashboard/files');
+}
+
+export async function deleteItem(id: string) {
+    try{
+        await sql`DELETE FROM "data" WHERE id = ${id}`;
+    }catch(error){
+        console.error(error);
+    }
+
+  revalidatePath('/dashboard/files');
 }
 
 export async function removeFriend(id: string | undefined) {
