@@ -28,9 +28,33 @@ const RegisterFormSchema = z.object({
   password2: z.string().min(6, { message: 'Passwords do not match' }),
 });
 
+const ItemsFormSchema = z.object({
+    id: z.string(),
+    user: z.string(),
+    name: z.string().min(1, { message: 'Name can not be empty' }),
+    extension: z.string().min(1, { message: 'File extension can not be empty' }),
+    desc: z.string(),
+    description: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+    quality: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+    capacity: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+    adaptable: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+    interaction: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+    motivation: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+    design: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+    reusable: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+    portable: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+    toughness: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+    structure: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+    navigation: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+    operable: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+    av_accessible: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+    text_accessible: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+});
+
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const UpdateInvoice = FormSchema.omit({ id: true, date: true });
 const RegisterUser = RegisterFormSchema.omit({ id: true });
+const CreateItem = ItemsFormSchema.omit({ id: true, user: true });
 
 export type State = {
   errors?: {
@@ -47,6 +71,30 @@ export type RegisterState = {
     email?: string[];
     password?: string[];
     password2?: string[];
+  };
+  message?: string | null;
+};
+
+export type ItemState = {
+  errors?: {
+    name?: string[];
+    extension?: string[];
+    desc?: string[];
+    description?: string[];
+    quality?: string[];
+    capacity?: string[];
+    adaptable?: string[];
+    interaction?: string[];
+    motivation?: string[];
+    design?: string[];
+    reusable?: string[];
+    portable?: string[];
+    toughness?: string[];
+    structure?: string[];
+    navigation?: string[];
+    operable?: string[];
+    av_accessible?: string[];
+    text_accessible?: string[];
   };
   message?: string | null;
 };
@@ -139,6 +187,59 @@ export async function getSession() {
     );
 
     return session;
+}
+
+export async function createItem(prevState: State, formData: FormData) {
+    const validatedFields = CreateItem.safeParse({
+        name: formData.get('name'),
+        extension: formData.get('extension'),
+        desc: formData.get('desc'),
+        description: formData.get('description'),
+        quality: formData.get('quality'),
+        capacity: formData.get('capacity'),
+        adaptable: formData.get('adaptable'),
+        interaction: formData.get('interaction'),
+        motivation: formData.get('motivation'),
+        design: formData.get('design'),
+        reusable: formData.get('reusable'),
+        portable: formData.get('portable'),
+        toughness: formData.get('toughness'),
+        structure: formData.get('structure'),
+        navigation: formData.get('navigation'),
+        operable: formData.get('operable'),
+        av_accessible: formData.get('av_accessible'),
+        text_accessible: formData.get('text_accessible'),
+    });
+
+    // If form validation fails, return errors early. Otherwise, continue.
+    if (!validatedFields.success) {
+        return {
+            errors: validatedFields.error.flatten().fieldErrors,
+            message: 'Missing Fields. Failed to Create your item.',
+        };
+    }
+
+    const { name, extension, desc, description, quality, capacity, adaptable, interaction, motivation, design, 
+        reusable, portable, toughness, structure, navigation, operable, av_accessible, text_accessible } = validatedFields.data;
+    const userId = formData.get('userId');
+
+    try{
+        await sql`
+            INSERT INTO data (user, name, extension, desc, description, quality, capacity, adaptable, 
+                interaction, motivation, design, reusable, portable, toughness, structure, 
+                navigation, operable, av_accessible, text_accessible)
+            VALUES (${userId}, ${name}, ${extension}, ${desc}, ${description}, ${quality}, ${capacity}, 
+                ${adaptable}, ${interaction}, ${motivation}, ${design}, ${reusable}, ${portable}, 
+                ${toughness}, ${structure}, ${navigation}, ${operable}, ${av_accessible}, ${text_accessible})
+        `;
+    }catch(error){
+        return {
+            message: 'Database Error: Failed to Create item.',
+        };
+    }
+
+    revalidatePath('/dashboard/files');
+    redirect('/dashboard/files');
 }
 
 export async function removeFriend(id: string | undefined) {
