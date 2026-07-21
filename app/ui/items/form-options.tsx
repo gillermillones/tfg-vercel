@@ -9,14 +9,14 @@ export default function FormOptions({ field }: { field: string }) {
                 <div className="flex gap-4" aria-describedby={`${field}-error`}>
                     <div className="flex items-center">
                         <input
-                        id="1"
+                        id={`${field}-1`}
                         name={field}
                         type="radio"
                         value="1"
                         className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                         />
                         <label
-                        htmlFor="1"
+                        htmlFor={`${field}-1`}
                         className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600"
                         >
                             1
@@ -24,14 +24,14 @@ export default function FormOptions({ field }: { field: string }) {
                     </div>
                     <div className="flex items-center">
                         <input
-                        id="2"
+                        id={`${field}-2`}
                         name={field}
                         type="radio"
                         value="2"
                         className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                         />
                         <label
-                        htmlFor="2"
+                        htmlFor={`${field}-2`}
                         className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
                         >
                             2
@@ -39,14 +39,14 @@ export default function FormOptions({ field }: { field: string }) {
                     </div>
                     <div className="flex items-center">
                         <input
-                        id="3"
+                        id={`${field}-3`}
                         name={field}
                         type="radio"
                         value="3"
                         className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                         />
                         <label
-                        htmlFor="3"
+                        htmlFor={`${field}-3`}
                         className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
                         >
                             3
@@ -54,14 +54,14 @@ export default function FormOptions({ field }: { field: string }) {
                     </div>
                     <div className="flex items-center">
                         <input
-                        id="4"
+                        id={`${field}-4`}
                         name={field}
                         type="radio"
                         value="4"
                         className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                         />
                         <label
-                        htmlFor="4"
+                        htmlFor={`${field}-4`}
                         className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
                         >
                             4
@@ -69,14 +69,14 @@ export default function FormOptions({ field }: { field: string }) {
                     </div>
                     <div className="flex items-center">
                         <input
-                        id="5"
+                        id={`${field}-5`}
                         name={field}
                         type="radio"
                         value="5"
                         className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
                         />
                         <label
-                        htmlFor="5"
+                        htmlFor={`${field}-5`}
                         className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
                         >
                             5

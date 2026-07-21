@@ -9,15 +9,14 @@ import {
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-import { SessionData } from "@/app/lib/session"
 
-export default function NavLinks({ session }: { session: SessionData }){
+export default function NavLinks({ userId }: { userId: string }){
   const pathname = usePathname();
   const links = [
     { name: 'Home', href: '/dashboard', icon: HomeIcon },
     { name: 'Invoices', href: '/dashboard/invoices', icon: DocumentDuplicateIcon },
     { name: 'Files', href: '/dashboard/files', icon: DocumentDuplicateIcon },
-    { name: 'Profile', href: '/dashboard/profile/' + session.userId, icon: UserIcon },
+    { name: 'Profile', href: '/dashboard/profile/' + userId, icon: UserIcon },
     { name: 'About us', href: '/dashboard/about', icon: ClipboardDocumentListIcon },
   ];
 

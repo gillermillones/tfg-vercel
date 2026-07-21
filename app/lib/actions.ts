@@ -34,21 +34,21 @@ const ItemsFormSchema = z.object({
     name: z.string().min(1, { message: 'Name can not be empty' }),
     extension: z.string().min(1, { message: 'File extension can not be empty' }),
     desc: z.string(),
-    description: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
-    quality: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
-    capacity: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
-    adaptable: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
-    interaction: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
-    motivation: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
-    design: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
-    reusable: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
-    portable: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
-    toughness: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
-    structure: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
-    navigation: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
-    operable: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
-    av_accessible: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
-    text_accessible: z.enum(['1', '2', '3', '4', '5'], { invalid_type_error: 'Please select a value' }),
+    description: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
+    quality: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
+    capacity: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
+    adaptable: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
+    interaction: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
+    motivation: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
+    design: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
+    reusable: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
+    portable: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
+    toughness: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
+    structure: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
+    navigation: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
+    operable: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
+    av_accessible: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
+    text_accessible: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
 });
 
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
@@ -225,7 +225,7 @@ export async function createItem(prevState: ItemState, formData: FormData) {
 
     try{
         await sql`
-            INSERT INTO data (user, name, extension, desc, description, quality, capacity, adaptable, 
+            INSERT INTO "data" (user_id, name, extension, summary, description, quality, capacity, adaptable, 
                 interaction, motivation, design, reusable, portable, toughness, structure, 
                 navigation, operable, av_accessible, text_accessible)
             VALUES (${session.userId}, ${name}, ${extension}, ${desc}, ${description}, ${quality}, ${capacity}, 
