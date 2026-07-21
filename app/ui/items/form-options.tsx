@@ -1,7 +1,7 @@
 export default function FormOptions({ field }: { field: string }) {
 
     return (
-        <fieldset aria-describedby={`${field}-error`}>
+        <div>
             <legend className="mb-2 block text-sm font-medium">
                 Set the {field} value
             </legend>
@@ -84,15 +84,7 @@ export default function FormOptions({ field }: { field: string }) {
                     </div>
                 </div>
             </div>
-            <div id={`${field}-error`} aria-live="polite" aria-atomic="true">
-                {state.errors?.[field] &&
-                state.errors.[field].map((error: string) => (
-                    <p className="mt-2 text-sm text-red-500" key={error}>
-                        {error}
-                    </p>
-                ))}
-            </div>
-        </fieldset>
+        </div>
     );
 }
 

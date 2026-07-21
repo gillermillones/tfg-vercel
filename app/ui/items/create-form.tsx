@@ -13,7 +13,7 @@ import { Button } from '@/app/ui/button';
 import { createItem, ItemState } from '@/app/lib/actions';
 import { useActionState } from 'react';
 
-export default function Form() {
+export default function ItemForm() {
   const initialState: ItemState = { message: null, errors: {} };
   const [state, formAction] = useActionState(
     createItem,
@@ -101,21 +101,172 @@ export default function Form() {
                     </div>
                 </div>
             </div>
-            <FormOptions field="description"></FormOptions>
-            <FormOptions field="quality"></FormOptions>
-            <FormOptions field="capacity"></FormOptions>
-            <FormOptions field="adaptable"></FormOptions>
-            <FormOptions field="interaction"></FormOptions>
-            <FormOptions field="motivation"></FormOptions>
-            <FormOptions field="design"></FormOptions>
-            <FormOptions field="reusable"></FormOptions>
-            <FormOptions field="portable"></FormOptions>
-            <FormOptions field="toughness"></FormOptions>
-            <FormOptions field="structure"></FormOptions>
-            <FormOptions field="navigation"></FormOptions>
-            <FormOptions field="operable"></FormOptions>
-            <FormOptions field="av_accessible"></FormOptions>
-            <FormOptions field="text_accesible"></FormOptions>
+            {/* Evaluated fields */}
+            <fieldset  aria-describedby="description-error">
+                <FormOptions field="description"></FormOptions>
+                <div id="description-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.description &&
+                    state.errors.description.map((error: string) => (
+                        <p className="mt-2 text-sm text-red-500" key={error}>
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            </fieldset>
+            <fieldset  aria-describedby="quality-error">
+                <FormOptions field="quality"></FormOptions>
+                <div id="quality-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.quality &&
+                    state.errors.quality.map((error: string) => (
+                        <p className="mt-2 text-sm text-red-500" key={error}>
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            </fieldset>
+            <fieldset  aria-describedby="capacity-error">
+                <FormOptions field="capacity"></FormOptions>
+                <div id="capacity-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.capacity &&
+                    state.errors.capacity.map((error: string) => (
+                        <p className="mt-2 text-sm text-red-500" key={error}>
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            </fieldset>
+            <fieldset  aria-describedby="adaptable-error">
+                <FormOptions field="adaptable"></FormOptions>
+                <div id="adaptable-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.adaptable &&
+                    state.errors.adaptable.map((error: string) => (
+                        <p className="mt-2 text-sm text-red-500" key={error}>
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            </fieldset>
+            <fieldset  aria-describedby="interaction-error">
+                <FormOptions field="interaction"></FormOptions>
+                <div id="interaction-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.interaction &&
+                    state.errors.interaction.map((error: string) => (
+                        <p className="mt-2 text-sm text-red-500" key={error}>
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            </fieldset>
+            <fieldset  aria-describedby="motivation-error">
+                <FormOptions field="motivation"></FormOptions>
+                <div id="motivation-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.motivation &&
+                    state.errors.motivation.map((error: string) => (
+                        <p className="mt-2 text-sm text-red-500" key={error}>
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            </fieldset>
+            <fieldset  aria-describedby="design-error">
+                <FormOptions field="design"></FormOptions>
+                <div id="design-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.design &&
+                    state.errors.design.map((error: string) => (
+                        <p className="mt-2 text-sm text-red-500" key={error}>
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            </fieldset>
+            <fieldset  aria-describedby="reusable-error">
+                <FormOptions field="reusable"></FormOptions>
+                <div id="reusable-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.reusable &&
+                    state.errors.reusable.map((error: string) => (
+                        <p className="mt-2 text-sm text-red-500" key={error}>
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            </fieldset>
+            <fieldset  aria-describedby="portable-error">
+                <FormOptions field="portable"></FormOptions>
+                <div id="portable-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.portable &&
+                    state.errors.portable.map((error: string) => (
+                        <p className="mt-2 text-sm text-red-500" key={error}>
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            </fieldset>
+            <fieldset  aria-describedby="toughness-error">
+                <FormOptions field="toughness"></FormOptions>
+                <div id="toughness-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.toughness &&
+                    state.errors.toughness.map((error: string) => (
+                        <p className="mt-2 text-sm text-red-500" key={error}>
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            </fieldset>
+            <fieldset  aria-describedby="structure-error">
+                <FormOptions field="structure"></FormOptions>
+                <div id="structure-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.structure &&
+                    state.errors.structure.map((error: string) => (
+                        <p className="mt-2 text-sm text-red-500" key={error}>
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            </fieldset>
+            <fieldset  aria-describedby="navigation-error">
+                <FormOptions field="navigation"></FormOptions>
+                <div id="navigation-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.navigation &&
+                    state.errors.navigation.map((error: string) => (
+                        <p className="mt-2 text-sm text-red-500" key={error}>
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            </fieldset>
+            <fieldset  aria-describedby="operable-error">
+                <FormOptions field="operable"></FormOptions>
+                <div id="operable-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.operable &&
+                    state.errors.operable.map((error: string) => (
+                        <p className="mt-2 text-sm text-red-500" key={error}>
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            </fieldset>
+            <fieldset  aria-describedby="av_accessible-error">
+                <FormOptions field="av_accessible"></FormOptions>
+                <div id="av_accessible-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.av_accessible &&
+                    state.errors.av_accessible.map((error: string) => (
+                        <p className="mt-2 text-sm text-red-500" key={error}>
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            </fieldset>
+            <fieldset  aria-describedby="text_accessible-error">
+                <FormOptions field="text_accessible"></FormOptions>
+                <div id="text_accessible-error" aria-live="polite" aria-atomic="true">
+                    {state.errors?.text_accessible &&
+                    state.errors.text_accessible.map((error: string) => (
+                        <p className="mt-2 text-sm text-red-500" key={error}>
+                            {error}
+                        </p>
+                    ))}
+                </div>
+            </fieldset>
         </div>
         <div id="general-error" aria-live="polite" aria-atomic="true">
             {state.message ?

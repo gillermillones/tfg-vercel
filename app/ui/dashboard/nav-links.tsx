@@ -16,6 +16,7 @@ export default function NavLinks({ session }: { session: SessionData }){
   const links = [
     { name: 'Home', href: '/dashboard', icon: HomeIcon },
     { name: 'Invoices', href: '/dashboard/invoices', icon: DocumentDuplicateIcon },
+    { name: 'Files', href: '/dashboard/files', icon: DocumentDuplicateIcon },
     { name: 'Profile', href: '/dashboard/profile/' + session.userId, icon: UserIcon },
     { name: 'About us', href: '/dashboard/about', icon: ClipboardDocumentListIcon },
   ];

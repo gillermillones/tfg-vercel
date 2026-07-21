@@ -189,7 +189,7 @@ export async function getSession() {
     return session;
 }
 
-export async function createItem(prevState: State, formData: FormData) {
+export async function createItem(prevState: ItemState, formData: FormData) {
     const validatedFields = CreateItem.safeParse({
         name: formData.get('name'),
         extension: formData.get('extension'),
@@ -221,14 +221,14 @@ export async function createItem(prevState: State, formData: FormData) {
 
     const { name, extension, desc, description, quality, capacity, adaptable, interaction, motivation, design, 
         reusable, portable, toughness, structure, navigation, operable, av_accessible, text_accessible } = validatedFields.data;
-    const userId = formData.get('userId');
+    const session = await getSession();
 
     try{
         await sql`
             INSERT INTO data (user, name, extension, desc, description, quality, capacity, adaptable, 
                 interaction, motivation, design, reusable, portable, toughness, structure, 
                 navigation, operable, av_accessible, text_accessible)
-            VALUES (${userId}, ${name}, ${extension}, ${desc}, ${description}, ${quality}, ${capacity}, 
+            VALUES (${session.userId}, ${name}, ${extension}, ${desc}, ${description}, ${quality}, ${capacity}, 
                 ${adaptable}, ${interaction}, ${motivation}, ${design}, ${reusable}, ${portable}, 
                 ${toughness}, ${structure}, ${navigation}, ${operable}, ${av_accessible}, ${text_accessible})
         `;
