@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import Search from '@/app/ui/search';
 import { lusitana } from '@/app/ui/fonts';
 import { Suspense } from 'react';
-import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
+import { ItemTableSkeleton } from '@/app/ui/skeletons';
 import { CreateItem } from '@/app/ui/items/buttons';
 import { fetchItemPagesUserId } from '@/app/lib/data';
 import { getSession } from '@/app/lib/actions';
@@ -34,7 +34,7 @@ export default async function Page(props: {
             <Search placeholder="Search a file..." />
             <CreateItem />
         </div>
-        <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
+        <Suspense key={query + currentPage} fallback={<ItemTableSkeleton />}>
             <ItemsTable query={query} currentPage={currentPage} id={session.userId}/>
         </Suspense>
         <div className="mt-5 flex w-full justify-center">

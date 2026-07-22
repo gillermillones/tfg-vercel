@@ -7,19 +7,15 @@ import FriendList from '@/app/ui/friends/friend-list';
 export default async function OwnProfileTable({ session }: { session: SessionData }) {
 
   return (
-    <div className="flex w-full items-center justify-between">
+    <div className="flex flex-col w-full items-center justify-between">
         <h1 className={`${lusitana.className} text-2xl`}>Your Profile Page</h1>
         <div>
-            <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-                <div>
-                    <h1>Email: {session.email}</h1>
-                    <h1>User ID:{session.userId}</h1>
-                </div>
-                <Suspense fallback={<FriendListSkeleton />}>
-                    <FriendList id={session.userId}/>
-                </Suspense>
-            </div>
+            <h1>Email: {session.email}</h1>
+            <h1>User ID:{session.userId}</h1>
         </div>
+        <Suspense fallback={<FriendListSkeleton />}>
+            <FriendList id={session.userId}/>
+        </Suspense>
     </div>
   );
 }
