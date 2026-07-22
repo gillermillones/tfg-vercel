@@ -34,7 +34,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                                 type="text"
                                 defaultValue={data.name}
                                 placeholder="File name"
-                                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                                className="peer block w-full rounded-md border border-gray-200 py-2 text-sm outline-2 placeholder:text-gray-500"
                                 aria-describedby="name-error"
                             />
                         </div>
@@ -61,7 +61,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                                 type="text"
                                 defaultValue={data.extension}
                                 placeholder="File extension"
-                                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                                className="peer block w-full rounded-md border border-gray-200 py-2 text-sm outline-2 placeholder:text-gray-500"
                                 aria-describedby="extension-error"
                             />
                         </div>
@@ -88,7 +88,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                                 type="text"
                                 defaultValue={data.summary}
                                 placeholder="File description"
-                                className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+                                className="peer block w-full rounded-md border border-gray-200 py-2 text-sm outline-2 placeholder:text-gray-500"
                                 aria-describedby="summary-error"
                             />
                         </div>
@@ -277,7 +277,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                     : <></>
                 }
             </div>
-            <div className="mt-6 flex justify-end gap-4">
+            <div className="mt-6 flex justify-between gap-4">
                 <Link
                 href="/dashboard/files"
                 className="flex h-10 items-center rounded-lg bg-red-400 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-red-500"

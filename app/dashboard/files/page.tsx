@@ -4,7 +4,8 @@ import { lusitana } from '@/app/ui/fonts';
 import { Suspense } from 'react';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { CreateItem } from '@/app/ui/items/buttons';
-import { fetchItemPages } from '@/app/lib/data';
+import { fetchItemPagesUserId } from '@/app/lib/data';
+import { getSession } from '@/app/lib/actions';
 import Pagination from '@/app/ui/invoices/pagination';
 import ItemsTable from '@/app/ui/items/table';
 
@@ -20,8 +21,9 @@ export default async function Page(props: {
 }) {
   const searchParams = await props.searchParams;
   const query = searchParams?.query || '';
+  const session = await getSession();
   const currentPage = Number(searchParams?.page) || 1;
-  const totalPages = await fetchItemPages(query);
+  const totalPages = await fetchItemPagesUserId(query, session.userId);
   
   return (
     <div className="w-full">
@@ -33,7 +35,7 @@ export default async function Page(props: {
             <CreateItem />
         </div>
         <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
-            <ItemsTable query={query} currentPage={currentPage} />
+            <ItemsTable query={query} currentPage={currentPage} id={session.userId}/>
         </Suspense>
         <div className="mt-5 flex w-full justify-center">
             <Pagination totalPages={totalPages} />

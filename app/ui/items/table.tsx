@@ -1,14 +1,16 @@
 import { UpdateItem, DeleteItem } from '@/app/ui/items/buttons';
-import { fetchFilteredItems } from '@/app/lib/data';
+import { fetchFilteredItemsUserId } from '@/app/lib/data';
 
 export default async function ItemsTable({
   query,
   currentPage,
+  id,
 }: {
   query: string;
   currentPage: number;
+  id: string;
 }) {
-  const items = await fetchFilteredItems(query, currentPage);
+  const items = await fetchFilteredItemsUserId(query, currentPage, id);
 
   return (
     <div className="mt-6 flow-root">

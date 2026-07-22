@@ -296,9 +296,10 @@ export async function fetchItemById(id: string) {
   }
 }
 
-export async function fetchFilteredItems(
+export async function fetchFilteredItemsUserId(
   query: string,
   currentPage: number,
+  id: string,
 ) {
   const offset = (currentPage - 1) * 10;
 
@@ -306,10 +307,10 @@ export async function fetchFilteredItems(
     const data = await sql<ItemData[]>`
       SELECT *
       FROM data
-      WHERE
-        data.name::text ILIKE ${`%${query}%`} OR
+      WHERE (data.name::text ILIKE ${`%${query}%`} OR
         data.extension::text ILIKE ${`%${query}%`} OR
-        data.summary::text ILIKE ${`%${query}%`}
+        data.summary::text ILIKE ${`%${query}%`}) AND
+        data.user_id = ${id}
       LIMIT 10 OFFSET ${offset}
     `;
 
@@ -320,15 +321,15 @@ export async function fetchFilteredItems(
   }
 }
 
-export async function fetchItemPages(query: string) {
+export async function fetchItemPagesUserId(query: string, id: string) {
   try {
     const data = await sql`
       SELECT COUNT(*)
       FROM data
-      WHERE
-        data.name::text ILIKE ${`%${query}%`} OR
+      WHERE (data.name::text ILIKE ${`%${query}%`} OR
         data.extension::text ILIKE ${`%${query}%`} OR
-        data.summary::text ILIKE ${`%${query}%`}
+        data.summary::text ILIKE ${`%${query}%`}) AND
+        data.user_id = ${id}
     `;
 
     const totalPages = Math.ceil(Number(data[0].count) / 10);
