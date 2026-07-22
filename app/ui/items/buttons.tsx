@@ -32,7 +32,7 @@ export function DeleteItem({ id }: { id: string }) {
       'use server';
       await deleteItem(id);
     }}>
-      <button type="submit" className="rounded-md border p-2 hover:bg-gray-100">
+      <button type="submit" className="rounded-md border p-2 bg-red-400 hover:bg-red-500">
         <span className="sr-only">Delete</span>
         <TrashIcon className="w-4" />
       </button>

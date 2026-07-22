@@ -1,16 +1,16 @@
-import { PlusIcon, TrashIcon, CheckIcon } from '@heroicons/react/24/outline';
-import { removeFriend, addFriend, acceptFriend, dismissFriend } from '@/app/lib/actions';
+import { PlusIcon, CheckIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { removeFriend, addFriend, acceptFriend } from '@/app/lib/actions';
 
-export function AddFriend({ id }: { id: string | undefined}) {
+export function AddFriend({ id }: { id: string | undefined }) {
 
     return (
     <form action={async () => {
       'use server';
       await addFriend(id);
     }}>
-      <button type="submit" className="rounded-md border p-2 hover:bg-gray-100">
+      <button type="submit" className="rounded-md border p-2 bg-green-300 hover:bg-green-400">
         <span className="sr-only">Add Friend</span>
-        <PlusIcon className="h-5 md:ml-4" />
+        <PlusIcon className="w-4" />
       </button>
     </form>
   );
@@ -23,9 +23,9 @@ export function AcceptFriend({ id }: { id: string }) {
       'use server';
       await acceptFriend(id);
     }}>
-      <button type="submit" className="rounded-md border p-2 hover:bg-gray-100">
+      <button type="submit" className="rounded-md border p-2 bg-green-300 hover:bg-green-400">
         <span className="sr-only">Accept Friend</span>
-        <CheckIcon className="h-5 md:ml-4" />
+        <CheckIcon className="w-4" />
       </button>
     </form>
   );
@@ -38,24 +38,9 @@ export function RemoveFriend({ id }: { id: string | undefined }) {
       'use server';
       await removeFriend(id);
     }}>
-      <button type="submit" className="rounded-md border p-2 hover:bg-gray-100">
+      <button type="submit" className="rounded-md border p-2 bg-red-400 hover:bg-red-500">
         <span className="sr-only">Remove Friend</span>
-        <TrashIcon className="w-4" />
-      </button>
-    </form>
-  );
-}
-
-export function DismissFriend({ id }: { id: string }) {
-    
-  return (
-    <form action={async () => {
-      'use server';
-      await dismissFriend(id);
-    }}>
-      <button type="submit" className="rounded-md border p-2 hover:bg-gray-100">
-        <span className="sr-only">Dismiss Friend</span>
-        <TrashIcon className="w-4" />
+        <XMarkIcon className="w-4" />
       </button>
     </form>
   );

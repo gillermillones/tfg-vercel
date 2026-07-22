@@ -5,7 +5,7 @@ import { notFound, forbidden } from 'next/navigation';
 import OwnProfileTable from '@/app/ui/profile/table';
 import FriendProfileTable from '@/app/ui/profile/friend-table';
 import UnknownProfileTable from '@/app/ui/profile/unknown-table';
-import { areWeFriends } from '@/app/lib/data';
+import { areWeFriends, areWeRequested } from '@/app/lib/data';
 
 export const metadata: Metadata = {
   title: 'Profile',
@@ -20,6 +20,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
   }
   const session = await getSession();
   const friendship = await areWeFriends(session.userId, id);
+  const requested = await areWeRequested(session.userId, id);
   
   if(session.userId.localeCompare(user?.id) == 0){
     return (
@@ -37,7 +38,7 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
 
   return (
     <div className="w-full">
-      <UnknownProfileTable user={user} />
+      <UnknownProfileTable user={user} requested={requested}/>
     </div>
   );
 }

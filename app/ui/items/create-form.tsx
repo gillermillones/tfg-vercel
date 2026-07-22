@@ -2,12 +2,6 @@
 
 import FormOptions  from '@/app/ui/items/form-options';
 import Link from 'next/link';
-import {
-  CheckIcon,
-  ClockIcon,
-  CurrencyDollarIcon,
-  UserCircleIcon,
-} from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
 import { createItem, ItemState } from '@/app/lib/actions';
 import { useActionState } from 'react';
@@ -277,7 +271,7 @@ export default function ItemForm() {
         </div>
         <div className="mt-6 flex justify-between gap-4">
             <Link
-            href="/dashboard/items"
+            href="/dashboard/files"
             className="flex h-10 items-center rounded-lg bg-red-400 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-red-500"
             >
                 Cancel

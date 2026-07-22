@@ -276,6 +276,29 @@ export async function areWeFriends(id1: string, id2: string) {
   }
 }
 
+export async function areWeRequested(id1: string, id2: string) {
+  try {
+    const result = await sql<{ exists: boolean }[]>`
+      SELECT EXISTS(
+        SELECT 1
+        FROM friends f
+        WHERE (
+            (f."userIdTarget" = ${id1}
+            AND f."userIdSource" = ${id2})
+          OR
+            (f."userIdTarget" = ${id2}
+            AND f."userIdSource" = ${id1})
+        )AND f.accepted = false
+      )as exists
+    `;
+
+    return result[0].exists;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Failed to prove friendship.');
+  }
+}
+
 export async function fetchItemById(id: string) {
   try {
     const data = await sql<ItemData[]>`

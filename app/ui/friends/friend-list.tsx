@@ -1,4 +1,4 @@
-import { RemoveFriend, AcceptFriend, DismissFriend } from '@/app/ui/friends/buttons';
+import { RemoveFriend, AcceptFriend } from '@/app/ui/friends/buttons';
 import Image from 'next/image';
 import Link from 'next/link';
 import { lusitana } from '@/app/ui/fonts';
@@ -11,54 +11,67 @@ export default async function FriendList({ id }: { id: string }) {
 
     return (
         <div className="flex w-full flex-col md:col-span-4">
-            <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
+            <h2 className={`${lusitana.className} mt-4 text-xl md:text-2xl`}>
                 Your friends
             </h2>
             <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
                 <div className="bg-white px-6">
-                    {friends.map((friend) => (
-                        <div key={friend.id} className='flex flex-row items-center justify-between py-4'>
-                            <div className="flex items-center">
-                                <div className="min-w-0">
-                                    <Link href={`/dashboard/profile/${friend.id}`}>
-                                        <p className="truncate text-sm font-semibold md:text-base">
-                                        {friend.name}
-                                        </p>
-                                        <p className="hidden text-sm text-gray-500 sm:block">
-                                        {friend.email}
-                                        </p>
-                                    </Link>
+                    {friends.length === 0 ? (
+                        <p>You dont have any friends yet </p>
+                        ):(
+                            friends.map((friend) => (
+                                <div key={friend.id} className='flex flex-row items-center justify-between py-4'>
+                                    <div className="flex items-center">
+                                        <div className="min-w-0">
+                                            <Link href={`/dashboard/profile/${friend.id}`}>
+                                                <p className="truncate text-sm font-semibold md:text-base">
+                                                {friend.name}
+                                                </p>
+                                                <p className="hidden text-sm text-gray-500 sm:block">
+                                                {friend.email}
+                                                </p>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                    <div className="flex justify-end gap-3">
+                                        <RemoveFriend id={friend.id} />
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="flex w-full items-center justify-between pt-4">
-                                <div className="flex justify-end gap-2">
-                                    <RemoveFriend id={friend.id} />
+                            ))
+                        )
+                    }
+                </div>
+            </div>
+            <h2 className={`${lusitana.className} mt-4 text-xl md:text-2xl`}>
+                Your friend requests
+            </h2>
+            <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
+                <div className="bg-white px-6">
+                    {friendRequests.length === 0 ? (
+                        <p>You dont have any friend requests yet </p>
+                        ):(
+                            friendRequests.map((friend) => (
+                                <div key={friend.id} className='flex flex-row items-center justify-between py-4'>
+                                    <div className="flex items-center">
+                                        <div className="min-w-0">
+                                            <Link href={`/dashboard/profile/${friend.id}`}>
+                                                <p className="truncate text-sm font-semibold md:text-base">
+                                                    {friend.name}
+                                                </p>
+                                                <p className="hidden text-sm text-gray-500 sm:block">
+                                                    {friend.email}
+                                                </p>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                    <div className="flex justify-end gap-3">
+                                        <AcceptFriend id={friend.id} />
+                                        <RemoveFriend id={friend.id} />
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    ))}
-                    {friendRequests.map((friend) => (
-                        <div key={friend.id} className='flex flex-row items-center justify-between py-4'>
-                            <div className="flex items-center">
-                                <div className="min-w-0">
-                                    <Link href={`/dashboard/profile/${friend.id}`}>
-                                        <p className="truncate text-sm font-semibold md:text-base">
-                                        {friend.name}
-                                        </p>
-                                        <p className="hidden text-sm text-gray-500 sm:block">
-                                        {friend.email}
-                                        </p>
-                                    </Link>
-                                </div>
-                            </div>
-                            <div className="flex w-full items-center justify-between pt-4">
-                                <div className="flex justify-end gap-2">
-                                    <AcceptFriend id={friend.id} />
-                                    <DismissFriend id={friend.id} />
-                                </div>
-                            </div>
-                        </div>
-                    ))}
+                            ))
+                        )
+                    }
                 </div>
             </div>
         </div>

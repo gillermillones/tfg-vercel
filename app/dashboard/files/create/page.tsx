@@ -1,13 +1,6 @@
-import { getSession } from '@/app/lib/actions';
 import ItemForm from '@/app/ui/items/create-form';
 import { Metadata } from 'next';
-import { getUserById } from '@/auth';
-import { notFound, forbidden } from 'next/navigation';
-import { lusitana } from '@/app/ui/fonts';
-import { Suspense } from 'react';
-import { FriendListSkeleton } from '@/app/ui/skeletons';
-import FriendList from '@/app/ui/friends/friend-list';
-import { areWeFriends } from '@/app/lib/data';
+import Breadcrumbs from '@/app/ui/breadcrumbs';
 
 export const metadata: Metadata = {
   title: 'New File',
@@ -16,15 +9,22 @@ export const metadata: Metadata = {
 export default async function Page() {
   
   return (
-    <div className="w-full">
-      <div className="flex w-full items-center justify-between">
-        <h1 className={`${lusitana.className} text-2xl`}>Your Files</h1>
-      </div>
+    <main>
+      <Breadcrumbs
+          breadcrumbs={[
+              { label: 'Your Files', href: '/dashboard/files' },
+              {
+                  label: 'New File',
+                  href: '/dashboard/files/create',
+                  active: true,
+              },
+          ]}
+       />
       <div className="flex w-full items-center justify-between pt-4">
         <div className="flex justify-end gap-2">
-            <ItemForm ></ItemForm>
+            <ItemForm />
         </div>
       </div>
-    </div>
+    </main>
   );
 }
