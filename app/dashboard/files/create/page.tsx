@@ -6,7 +6,7 @@ import { notFound, forbidden } from 'next/navigation';
 import { lusitana } from '@/app/ui/fonts';
 import { Suspense } from 'react';
 import { FriendListSkeleton } from '@/app/ui/skeletons';
-import FriendList from '@/app/ui/dashboard/friend-list';
+import FriendList from '@/app/ui/friends/friend-list';
 import { areWeFriends } from '@/app/lib/data';
 
 export const metadata: Metadata = {

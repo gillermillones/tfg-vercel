@@ -2,11 +2,9 @@ import { getSession } from '@/app/lib/actions';
 import { Metadata } from 'next';
 import { getUserById } from '@/auth';
 import { notFound, forbidden } from 'next/navigation';
-import { lusitana } from '@/app/ui/fonts';
-import { Suspense } from 'react';
-import { FriendListSkeleton } from '@/app/ui/skeletons';
-import { AddFriend, RemoveFriend } from '@/app/ui/friends/buttons';
-import FriendList from '@/app/ui/dashboard/friend-list';
+import OwnProfileTable from '@/app/ui/profile/table';
+import FriendProfileTable from '@/app/ui/profile/friend-table';
+import UnknownProfileTable from '@/app/ui/profile/unknown-table';
 import { areWeFriends } from '@/app/lib/data';
 
 export const metadata: Metadata = {
@@ -26,55 +24,20 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
   if(session.userId.localeCompare(user?.id) == 0){
     return (
       <div className="w-full">
-        <div className="flex w-full items-center justify-between">
-          <h1 className={`${lusitana.className} text-2xl`}>Your Profile Page</h1>
-        </div>
-        <div>
-          <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-4 lg:grid-cols-8">
-            <div>
-              <h1>Email: {session.email}</h1>
-              <h1>User ID:{session.userId}</h1>
-            </div>
-            <Suspense fallback={<FriendListSkeleton />}>
-              <FriendList id={session.userId}/>
-            </Suspense>
-          </div>
-        </div>
+        <OwnProfileTable session={session} />
       </div>
     );
   }else if(friendship == true){
     return (
       <div className="w-full">
-        <div className="flex w-full items-center justify-between">
-          <h1 className={`${lusitana.className} text-2xl`}>{user?.name}'s Profile Page</h1>
-        </div>
-        <div>
-          <h1>Email: {user?.email}</h1>
-          <h1>User ID:{user?.id}</h1>
-        </div>
-        <div className="flex w-full items-center justify-between pt-4">
-          <div className="flex justify-end gap-2">
-            <RemoveFriend id={user?.id} />
-          </div>
-        </div>
+        <FriendProfileTable user={user} />
       </div>
     );
   }
 
   return (
     <div className="w-full">
-      <div className="flex w-full items-center justify-between">
-        <h1 className={`${lusitana.className} text-2xl`}>{user?.name}'s Profile Page</h1>
-      </div>
-      <div>
-        <h1>Email: {user?.email}</h1>
-        <h1>User ID:{user?.id}</h1>
-      </div>
-      <div className="flex w-full items-center justify-between pt-4">
-        <div className="flex justify-end gap-2">
-          <AddFriend id={user?.id} />
-        </div>
-      </div>
+      <UnknownProfileTable user={user} />
     </div>
   );
 }

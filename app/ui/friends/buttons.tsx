@@ -54,7 +54,7 @@ export function DismissFriend({ id }: { id: string }) {
       await dismissFriend(id);
     }}>
       <button type="submit" className="rounded-md border p-2 hover:bg-gray-100">
-        <span className="sr-only">Remove Friend</span>
+        <span className="sr-only">Dismiss Friend</span>
         <TrashIcon className="w-4" />
       </button>
     </form>
