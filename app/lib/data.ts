@@ -309,7 +309,7 @@ export async function fetchFilteredItems(
       WHERE
         data.name::text ILIKE ${`%${query}%`} OR
         data.extension::text ILIKE ${`%${query}%`} OR
-        data.summary ILIKE ${`%${query}%`}
+        data.summary::text ILIKE ${`%${query}%`}
       LIMIT 10 OFFSET ${offset}
     `;
 
@@ -328,7 +328,7 @@ export async function fetchItemPages(query: string) {
       WHERE
         data.name::text ILIKE ${`%${query}%`} OR
         data.extension::text ILIKE ${`%${query}%`} OR
-        data.summary ILIKE ${`%${query}%`}
+        data.summary::text ILIKE ${`%${query}%`}
     `;
 
     const totalPages = Math.ceil(Number(data[0].count) / 10);

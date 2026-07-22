@@ -17,7 +17,7 @@ export default function FormOptions({ field }: { field: string }) {
                         />
                         <label
                         htmlFor={`${field}-1`}
-                        className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-600"
+                        className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-red-200 px-3 py-1.5 text-xs font-medium text-white"
                         >
                             1
                         </label>
@@ -32,7 +32,7 @@ export default function FormOptions({ field }: { field: string }) {
                         />
                         <label
                         htmlFor={`${field}-2`}
-                        className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
+                        className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-orange-300 px-3 py-1.5 text-xs font-medium text-white"
                         >
                             2
                         </label>
@@ -47,7 +47,7 @@ export default function FormOptions({ field }: { field: string }) {
                         />
                         <label
                         htmlFor={`${field}-3`}
-                        className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
+                        className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-yellow-300 px-3 py-1.5 text-xs font-medium text-white"
                         >
                             3
                         </label>
@@ -62,7 +62,7 @@ export default function FormOptions({ field }: { field: string }) {
                         />
                         <label
                         htmlFor={`${field}-4`}
-                        className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
+                        className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-300 px-3 py-1.5 text-xs font-medium text-white"
                         >
                             4
                         </label>
@@ -77,7 +77,7 @@ export default function FormOptions({ field }: { field: string }) {
                         />
                         <label
                         htmlFor={`${field}-5`}
-                        className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-green-500 px-3 py-1.5 text-xs font-medium text-white"
+                        className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-blue-300 px-3 py-1.5 text-xs font-medium text-white"
                         >
                             5
                         </label>

@@ -77,24 +77,24 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                 </div>
                 {/* File description */}
                 <div className="mb-4">
-                    <label htmlFor="desc" className="mb-2 block text-sm font-medium">
+                    <label htmlFor="summary" className="mb-2 block text-sm font-medium">
                         File description
                     </label>
                     <div className="relative mt-2 rounded-md">
                         <div className="relative">
                             <input
-                                id="desc"
-                                name="desc"
+                                id="summary"
+                                name="summary"
                                 type="text"
-                                defaultValue={data.desc}
+                                defaultValue={data.summary}
                                 placeholder="File description"
                                 className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
-                                aria-describedby="desc-error"
+                                aria-describedby="summary-error"
                             />
                         </div>
-                        <div id="desc-error" aria-live="polite" aria-atomic="true">
-                            {state.errors?.desc &&
-                            state.errors.desc.map((error: string) => (
+                        <div id="summary-error" aria-live="polite" aria-atomic="true">
+                            {state.errors?.summary &&
+                            state.errors.summary.map((error: string) => (
                                 <p className="mt-2 text-sm text-red-500" key={error}>
                                 {error}
                                 </p>

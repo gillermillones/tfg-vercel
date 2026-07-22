@@ -33,7 +33,7 @@ const ItemsFormSchema = z.object({
     user: z.string(),
     name: z.string().min(1, { message: 'Name can not be empty' }),
     extension: z.string().min(1, { message: 'File extension can not be empty' }),
-    desc: z.string(),
+    summary: z.string(),
     description: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
     quality: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
     capacity: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
@@ -80,7 +80,7 @@ export type ItemState = {
   errors?: {
     name?: string[];
     extension?: string[];
-    desc?: string[];
+    summary?: string[];
     description?: string[];
     quality?: string[];
     capacity?: string[];
@@ -194,7 +194,7 @@ export async function createItem(prevState: ItemState, formData: FormData) {
     const validatedFields = CreateItem.safeParse({
         name: formData.get('name'),
         extension: formData.get('extension'),
-        desc: formData.get('desc'),
+        summary: formData.get('desc'),
         description: formData.get('description'),
         quality: formData.get('quality'),
         capacity: formData.get('capacity'),
@@ -220,7 +220,7 @@ export async function createItem(prevState: ItemState, formData: FormData) {
         };
     }
 
-    const { name, extension, desc, description, quality, capacity, adaptable, interaction, motivation, design, 
+    const { name, extension, summary, description, quality, capacity, adaptable, interaction, motivation, design, 
         reusable, portable, toughness, structure, navigation, operable, av_accessible, text_accessible } = validatedFields.data;
     const session = await getSession();
 
@@ -229,7 +229,7 @@ export async function createItem(prevState: ItemState, formData: FormData) {
             INSERT INTO "data" (user_id, name, extension, summary, description, quality, capacity, adaptable, 
                 interaction, motivation, design, reusable, portable, toughness, structure, 
                 navigation, operable, av_accessible, text_accessible)
-            VALUES (${session.userId}, ${name}, ${extension}, ${desc}, ${description}, ${quality}, ${capacity}, 
+            VALUES (${session.userId}, ${name}, ${extension}, ${summary}, ${description}, ${quality}, ${capacity}, 
                 ${adaptable}, ${interaction}, ${motivation}, ${design}, ${reusable}, ${portable}, 
                 ${toughness}, ${structure}, ${navigation}, ${operable}, ${av_accessible}, ${text_accessible})
         `;
@@ -247,7 +247,7 @@ export async function updateItem(id: string, prevState: ItemState, formData: For
     const validatedFields = UpdateItem.safeParse({
         name: formData.get('name'),
         extension: formData.get('extension'),
-        desc: formData.get('desc'),
+        summary: formData.get('summary'),
         description: formData.get('description'),
         quality: formData.get('quality'),
         capacity: formData.get('capacity'),
@@ -273,13 +273,13 @@ export async function updateItem(id: string, prevState: ItemState, formData: For
         };
     }
 
-    const { name, extension, desc, description, quality, capacity, adaptable, interaction, motivation, design, 
+    const { name, extension, summary, description, quality, capacity, adaptable, interaction, motivation, design, 
         reusable, portable, toughness, structure, navigation, operable, av_accessible, text_accessible } = validatedFields.data;
 
     try{  
         await sql`
             UPDATE "data"
-            SET name = ${name}, extension = ${extension}, summary = ${desc}, description = ${description}, quality = ${quality}, capacity = ${capacity}, adaptable = ${adaptable},
+            SET name = ${name}, extension = ${extension}, summary = ${summary}, description = ${description}, quality = ${quality}, capacity = ${capacity}, adaptable = ${adaptable},
                 interaction = ${interaction}, motivation = ${motivation}, design = ${design}, reusable = ${reusable}, portable = ${portable}, toughness = ${toughness},
                 structure = ${structure}, navigation = ${navigation}, operable = ${operable}, av_accessible = ${av_accessible}, text_accessible = ${text_accessible}
             WHERE id = ${id}

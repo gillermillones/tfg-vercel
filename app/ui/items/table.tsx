@@ -26,7 +26,7 @@ export default async function ItemsTable({
                       <p>{i.name}</p>
                     </div>
                     <p className="text-sm text-gray-500">{i.extension}</p>
-                    <p className="text-sm text-gray-500">{i.desc}</p>
+                    <p className="text-sm text-gray-500">{i.summary}</p>
                   </div>
                 </div>
                 <div className="flex w-full items-center justify-between pt-4">
@@ -45,7 +45,7 @@ export default async function ItemsTable({
                   File name
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  File xtension
+                  File extension
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   File description
@@ -70,7 +70,7 @@ export default async function ItemsTable({
                     {i.extension}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {i.desc}
+                    {i.summary}
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">

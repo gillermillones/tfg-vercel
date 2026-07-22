@@ -98,7 +98,7 @@ export type ItemData = {
   user: string;
   name: string;
   extension: string;
-  desc: string;
+  summary: string;
   description: number;
   quality: number;
   capacity: number;
