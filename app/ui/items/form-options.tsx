@@ -17,7 +17,7 @@ export default function FormOptions({ field }: { field: string }) {
                         />
                         <label
                         htmlFor={`${field}-1`}
-                        className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-red-200 px-3 py-1.5 text-xs font-medium text-white"
+                        className="ml-2 flex cursor-pointer items-center gap-1.5 rounded-full bg-red-400 px-3 py-1.5 text-xs font-medium text-white"
                         >
                             1
                         </label>

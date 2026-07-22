@@ -103,7 +103,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                     </div>
                 </div>
                 {/* Evaluated fields */}
-                <fieldset  aria-describedby="description-error">
+                <fieldset className="mb-4" aria-describedby="description-error">
                     <FormOptionsEdit field="description" num={data.description}></FormOptionsEdit>
                     <div id="description-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.description &&
@@ -114,7 +114,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                         ))}
                     </div>
                 </fieldset>
-                <fieldset  aria-describedby="quality-error">
+                <fieldset className="mb-4" aria-describedby="quality-error">
                     <FormOptionsEdit field="quality" num={data.quality}></FormOptionsEdit>
                     <div id="quality-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.quality &&
@@ -125,7 +125,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                         ))}
                     </div>
                 </fieldset>
-                <fieldset  aria-describedby="capacity-error">
+                <fieldset className="mb-4" aria-describedby="capacity-error">
                     <FormOptionsEdit field="capacity" num={data.capacity}></FormOptionsEdit>
                     <div id="capacity-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.capacity &&
@@ -136,7 +136,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                         ))}
                     </div>
                 </fieldset>
-                <fieldset  aria-describedby="adaptable-error">
+                <fieldset className="mb-4" aria-describedby="adaptable-error">
                     <FormOptionsEdit field="adaptable" num={data.adaptable}></FormOptionsEdit>
                     <div id="adaptable-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.adaptable &&
@@ -147,7 +147,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                         ))}
                     </div>
                 </fieldset>
-                <fieldset  aria-describedby="interaction-error">
+                <fieldset className="mb-4" aria-describedby="interaction-error">
                     <FormOptionsEdit field="interaction" num={data.interaction}></FormOptionsEdit>
                     <div id="interaction-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.interaction &&
@@ -158,7 +158,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                         ))}
                     </div>
                 </fieldset>
-                <fieldset  aria-describedby="motivation-error">
+                <fieldset className="mb-4" aria-describedby="motivation-error">
                     <FormOptionsEdit field="motivation" num={data.motivation}></FormOptionsEdit>
                     <div id="motivation-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.motivation &&
@@ -169,7 +169,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                         ))}
                     </div>
                 </fieldset>
-                <fieldset  aria-describedby="design-error">
+                <fieldset className="mb-4" aria-describedby="design-error">
                     <FormOptionsEdit field="design" num={data.design}></FormOptionsEdit>
                     <div id="design-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.design &&
@@ -180,7 +180,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                         ))}
                     </div>
                 </fieldset>
-                <fieldset  aria-describedby="reusable-error">
+                <fieldset className="mb-4" aria-describedby="reusable-error">
                     <FormOptionsEdit field="reusable" num={data.reusable}></FormOptionsEdit>
                     <div id="reusable-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.reusable &&
@@ -191,7 +191,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                         ))}
                     </div>
                 </fieldset>
-                <fieldset  aria-describedby="portable-error">
+                <fieldset className="mb-4" aria-describedby="portable-error">
                     <FormOptionsEdit field="portable" num={data.portable}></FormOptionsEdit>
                     <div id="portable-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.portable &&
@@ -202,7 +202,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                         ))}
                     </div>
                 </fieldset>
-                <fieldset  aria-describedby="toughness-error">
+                <fieldset className="mb-4" aria-describedby="toughness-error">
                     <FormOptionsEdit field="toughness" num={data.toughness}></FormOptionsEdit>
                     <div id="toughness-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.toughness &&
@@ -213,7 +213,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                         ))}
                     </div>
                 </fieldset>
-                <fieldset  aria-describedby="structure-error">
+                <fieldset className="mb-4" aria-describedby="structure-error">
                     <FormOptionsEdit field="structure" num={data.structure}></FormOptionsEdit>
                     <div id="structure-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.structure &&
@@ -224,7 +224,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                         ))}
                     </div>
                 </fieldset>
-                <fieldset  aria-describedby="navigation-error">
+                <fieldset className="mb-4" aria-describedby="navigation-error">
                     <FormOptionsEdit field="navigation" num={data.navigation}></FormOptionsEdit>
                     <div id="navigation-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.navigation &&
@@ -235,7 +235,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                         ))}
                     </div>
                 </fieldset>
-                <fieldset  aria-describedby="operable-error">
+                <fieldset className="mb-4" aria-describedby="operable-error">
                     <FormOptionsEdit field="operable" num={data.operable}></FormOptionsEdit>
                     <div id="operable-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.operable &&
@@ -246,7 +246,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                         ))}
                     </div>
                 </fieldset>
-                <fieldset  aria-describedby="av_accessible-error">
+                <fieldset className="mb-4" aria-describedby="av_accessible-error">
                     <FormOptionsEdit field="av_accessible" num={data.av_accessible}></FormOptionsEdit>
                     <div id="av_accessible-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.av_accessible &&
@@ -257,7 +257,7 @@ export default function EditItemForm({ data }: {data: ItemData }) {
                         ))}
                     </div>
                 </fieldset>
-                <fieldset  aria-describedby="text_accessible-error">
+                <fieldset className="mb-4" aria-describedby="text_accessible-error">
                     <FormOptionsEdit field="text_accessible" num={data.text_accessible}></FormOptionsEdit>
                     <div id="text_accessible-error" aria-live="polite" aria-atomic="true">
                         {state.errors?.text_accessible &&
@@ -280,11 +280,11 @@ export default function EditItemForm({ data }: {data: ItemData }) {
             <div className="mt-6 flex justify-end gap-4">
                 <Link
                 href="/dashboard/files"
-                className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+                className="flex h-10 items-center rounded-lg bg-red-400 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-red-500"
                 >
                     Cancel
                 </Link>
-                <Button type="submit">Create Item</Button>
+                <Button type="submit">Confirm editing</Button>
             </div>
         </form>
     );

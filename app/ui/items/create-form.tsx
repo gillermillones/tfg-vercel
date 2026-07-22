@@ -101,7 +101,7 @@ export default function ItemForm() {
                 </div>
             </div>
             {/* Evaluated fields */}
-            <fieldset  aria-describedby="description-error">
+            <fieldset className="mb-4" aria-describedby="description-error">
                 <FormOptions field="description"></FormOptions>
                 <div id="description-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.description &&
@@ -112,7 +112,7 @@ export default function ItemForm() {
                     ))}
                 </div>
             </fieldset>
-            <fieldset  aria-describedby="quality-error">
+            <fieldset className="mb-4" aria-describedby="quality-error">
                 <FormOptions field="quality"></FormOptions>
                 <div id="quality-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.quality &&
@@ -123,7 +123,7 @@ export default function ItemForm() {
                     ))}
                 </div>
             </fieldset>
-            <fieldset  aria-describedby="capacity-error">
+            <fieldset className="mb-4" aria-describedby="capacity-error">
                 <FormOptions field="capacity"></FormOptions>
                 <div id="capacity-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.capacity &&
@@ -134,7 +134,7 @@ export default function ItemForm() {
                     ))}
                 </div>
             </fieldset>
-            <fieldset  aria-describedby="adaptable-error">
+            <fieldset className="mb-4" aria-describedby="adaptable-error">
                 <FormOptions field="adaptable"></FormOptions>
                 <div id="adaptable-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.adaptable &&
@@ -145,7 +145,7 @@ export default function ItemForm() {
                     ))}
                 </div>
             </fieldset>
-            <fieldset  aria-describedby="interaction-error">
+            <fieldset className="mb-4" aria-describedby="interaction-error">
                 <FormOptions field="interaction"></FormOptions>
                 <div id="interaction-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.interaction &&
@@ -156,7 +156,7 @@ export default function ItemForm() {
                     ))}
                 </div>
             </fieldset>
-            <fieldset  aria-describedby="motivation-error">
+            <fieldset className="mb-4" aria-describedby="motivation-error">
                 <FormOptions field="motivation"></FormOptions>
                 <div id="motivation-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.motivation &&
@@ -167,7 +167,7 @@ export default function ItemForm() {
                     ))}
                 </div>
             </fieldset>
-            <fieldset  aria-describedby="design-error">
+            <fieldset className="mb-4" aria-describedby="design-error">
                 <FormOptions field="design"></FormOptions>
                 <div id="design-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.design &&
@@ -178,7 +178,7 @@ export default function ItemForm() {
                     ))}
                 </div>
             </fieldset>
-            <fieldset  aria-describedby="reusable-error">
+            <fieldset className="mb-4" aria-describedby="reusable-error">
                 <FormOptions field="reusable"></FormOptions>
                 <div id="reusable-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.reusable &&
@@ -189,7 +189,7 @@ export default function ItemForm() {
                     ))}
                 </div>
             </fieldset>
-            <fieldset  aria-describedby="portable-error">
+            <fieldset className="mb-4" aria-describedby="portable-error">
                 <FormOptions field="portable"></FormOptions>
                 <div id="portable-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.portable &&
@@ -200,7 +200,7 @@ export default function ItemForm() {
                     ))}
                 </div>
             </fieldset>
-            <fieldset  aria-describedby="toughness-error">
+            <fieldset className="mb-4" aria-describedby="toughness-error">
                 <FormOptions field="toughness"></FormOptions>
                 <div id="toughness-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.toughness &&
@@ -211,7 +211,7 @@ export default function ItemForm() {
                     ))}
                 </div>
             </fieldset>
-            <fieldset  aria-describedby="structure-error">
+            <fieldset className="mb-4" aria-describedby="structure-error">
                 <FormOptions field="structure"></FormOptions>
                 <div id="structure-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.structure &&
@@ -222,7 +222,7 @@ export default function ItemForm() {
                     ))}
                 </div>
             </fieldset>
-            <fieldset  aria-describedby="navigation-error">
+            <fieldset className="mb-4" aria-describedby="navigation-error">
                 <FormOptions field="navigation"></FormOptions>
                 <div id="navigation-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.navigation &&
@@ -233,7 +233,7 @@ export default function ItemForm() {
                     ))}
                 </div>
             </fieldset>
-            <fieldset  aria-describedby="operable-error">
+            <fieldset className="mb-4" aria-describedby="operable-error">
                 <FormOptions field="operable"></FormOptions>
                 <div id="operable-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.operable &&
@@ -244,7 +244,7 @@ export default function ItemForm() {
                     ))}
                 </div>
             </fieldset>
-            <fieldset  aria-describedby="av_accessible-error">
+            <fieldset className="mb-4" aria-describedby="av_accessible-error">
                 <FormOptions field="av_accessible"></FormOptions>
                 <div id="av_accessible-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.av_accessible &&
@@ -255,7 +255,7 @@ export default function ItemForm() {
                     ))}
                 </div>
             </fieldset>
-            <fieldset  aria-describedby="text_accessible-error">
+            <fieldset className="mb-4" aria-describedby="text_accessible-error">
                 <FormOptions field="text_accessible"></FormOptions>
                 <div id="text_accessible-error" aria-live="polite" aria-atomic="true">
                     {state.errors?.text_accessible &&
@@ -278,7 +278,7 @@ export default function ItemForm() {
         <div className="mt-6 flex justify-end gap-4">
             <Link
             href="/dashboard/items"
-            className="flex h-10 items-center rounded-lg bg-gray-100 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-gray-200"
+            className="flex h-10 items-center rounded-lg bg-red-400 px-4 text-sm font-medium text-gray-600 transition-colors hover:bg-red-500"
             >
                 Cancel
             </Link>

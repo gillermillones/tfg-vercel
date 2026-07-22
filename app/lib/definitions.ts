@@ -95,7 +95,7 @@ export type Friendship = {
 
 export type ItemData = {
   id: string;
-  user: string;
+  user_id: string;
   name: string;
   extension: string;
   summary: string;

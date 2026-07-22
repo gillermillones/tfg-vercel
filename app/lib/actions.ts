@@ -30,7 +30,7 @@ const RegisterFormSchema = z.object({
 
 const ItemsFormSchema = z.object({
     id: z.string(),
-    user: z.string(),
+    user_id: z.string(),
     name: z.string().min(1, { message: 'Name can not be empty' }),
     extension: z.string().min(1, { message: 'File extension can not be empty' }),
     summary: z.string(),
@@ -54,8 +54,8 @@ const ItemsFormSchema = z.object({
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const UpdateInvoice = FormSchema.omit({ id: true, date: true });
 const RegisterUser = RegisterFormSchema.omit({ id: true });
-const CreateItem = ItemsFormSchema.omit({ id: true, user: true });
-const UpdateItem = ItemsFormSchema.omit({ id: true, user: true });
+const CreateItem = ItemsFormSchema.omit({ id: true, user_id: true });
+const UpdateItem = ItemsFormSchema.omit({ id: true, user_id: true });
 
 export type State = {
   errors?: {
