@@ -112,7 +112,7 @@ export default function ItemsTable({
                 </tr>
                 {state === i.id && (
                   <tr>
-                    <td>
+                    <td colSpan={idSession.localeCompare(idUser) == 0 ? 5 : 4}>
                       <ShowValues item={i} />
                     </td>
                   </tr>
