@@ -1,5 +1,4 @@
 import { ItemData } from '@/app/lib/definitions';
-import { getSession } from '@/app/lib/actions';
 
 export default function ShowValues({ item }:{ item: ItemData }) {
 
@@ -56,53 +55,53 @@ export default function ShowValues({ item }:{ item: ItemData }) {
         </thead>
         <tbody className="bg-gray-200">
             <tr
-                key={i.id}
+                key={item.id}
                 className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
             >
                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    {i.description}
+                    {item.description}
                 </td>
                 <td className="whitespace-nowrap px-3 py-3">
-                    {i.quality}
+                    {item.quality}
                 </td>
                 <td className="whitespace-nowrap px-3 py-3">
-                    {i.capacity}
+                    {item.capacity}
                 </td>
                 <td className="whitespace-nowrap px-3 py-3">
-                    {i.adaptable}
+                    {item.adaptable}
                 </td>
                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    {i.interaction}
+                    {item.interaction}
                 </td>
                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    {i.motivation}
+                    {item.motivation}
                 </td>
                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    {i.design}
+                    {item.design}
                 </td>
                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    {i.reusable}
+                    {item.reusable}
                 </td>
                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    {i.portable}
+                    {item.portable}
                 </td>
                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    {i.toughness}
+                    {item.toughness}
                 </td>
                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    {i.structure}
+                    {item.structure}
                 </td>
                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    {i.navigation}
+                    {item.navigation}
                 </td>
                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    {i.operable}
+                    {item.operable}
                 </td>
                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    {i.av_accessible}
+                    {item.av_accessible}
                 </td>
                 <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    {i.text_accessible}
+                    {item.text_accessible}
                 </td>
             </tr>
         </tbody>
