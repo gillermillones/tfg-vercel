@@ -1,5 +1,6 @@
 import { UpdateItem, DeleteItem } from '@/app/ui/items/buttons';
 import { fetchFilteredItemsUserId } from '@/app/lib/data';
+import { getSession } from '@/app/lib/actions';
 
 export default async function ItemsTable({
   query,
@@ -10,6 +11,7 @@ export default async function ItemsTable({
   currentPage: number;
   id: string;
 }) {
+  const session = await getSession();
   const items = await fetchFilteredItemsUserId(query, currentPage, id);
 
   return (
@@ -31,12 +33,16 @@ export default async function ItemsTable({
                     <p className="text-sm text-gray-500">{i.summary}</p>
                   </div>
                 </div>
-                <div className="flex w-full items-center justify-between pt-4">
-                  <div className="flex justify-end gap-2">
-                    <UpdateItem id={i.id} />
-                    <DeleteItem id={i.id} />
-                  </div>
-                </div>
+                {session.userId.localeCompare(id) == 0 ? (
+                    <div className="flex w-full items-center justify-between pt-4">
+                        <div className="flex justify-end gap-2">
+                          <UpdateItem id={i.id} />
+                          <DeleteItem id={i.id} />
+                        </div>
+                    </div>
+                    ):(
+                      <></>
+                    )}
               </div>
             ))}
           </div>
@@ -74,12 +80,16 @@ export default async function ItemsTable({
                   <td className="whitespace-nowrap px-3 py-3">
                     {i.summary}
                   </td>
-                  <td className="whitespace-nowrap py-3 pl-6 pr-3">
-                    <div className="flex justify-end gap-3">
-                      <UpdateItem id={i.id} />
-                      <DeleteItem id={i.id} />
-                    </div>
-                  </td>
+                  {session.userId.localeCompare(id) == 0 ? (
+                    <td className="whitespace-nowrap py-3 pl-6 pr-3">
+                      <div className="flex justify-end gap-3">
+                        <UpdateItem id={i.id} />
+                        <DeleteItem id={i.id} />
+                      </div>
+                    </td>
+                    ):(
+                        <></>
+                    )}
                 </tr>
               ))}
             </tbody>
