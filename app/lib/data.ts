@@ -230,6 +230,23 @@ export async function nameRepeated(name: string) {
   }
 }
 
+export async function emailRepeated(email: string) {
+  try {
+    const result = await sql<{ exists: boolean }[]>`
+      SELECT EXISTS(
+        SELECT 1
+        FROM users u
+        WHERE u.email = ${email}
+      )as exists
+    `;
+
+    return result[0].exists;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Can not check user name availability');
+  }
+}
+
 export async function fetchFriends(id: string) {
   try {
     const friends = await sql<User[]>`

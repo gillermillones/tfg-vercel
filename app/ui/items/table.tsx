@@ -1,19 +1,22 @@
-import { UpdateItem, DeleteItem } from '@/app/ui/items/buttons';
-import { fetchFilteredItemsUserId } from '@/app/lib/data';
-import { getSession } from '@/app/lib/actions';
-import { ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
+'use client'
 
-export default async function ItemsTable({
-  query,
-  currentPage,
-  id,
+import { UpdateItem, DeleteItem } from '@/app/ui/items/buttons';
+import { ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
+import { useState } from 'react'
+import ShowValues from '@/app/ui/items/show-values';
+import { ItemData } from '@/app/lib/definitions';
+
+export default function ItemsTable({
+  items,
+  idSession,
+  idUser,
 }: {
-  query: string;
-  currentPage: number;
-  id: string;
+  items: ItemData[];
+  idSession: string;
+  idUser: string;
 }) {
-  const session = await getSession();
-  const items = await fetchFilteredItemsUserId(query, currentPage, id);
+  const [state, setState] = useState<string | null>(null);
+  const changeState = (itemId : string) => {setState(state === itemId ? null : itemId)}
 
   return (
     <div className="mt-6 flow-root">
@@ -34,7 +37,7 @@ export default async function ItemsTable({
                     <p className="text-sm text-gray-500">{i.summary}</p>
                   </div>
                 </div>
-                {session.userId.localeCompare(id) == 0 ? (
+                {idSession.localeCompare(idUser) == 0 ? (
                     <div className="flex w-full items-center justify-between pt-4">
                         <div className="flex justify-end gap-2">
                           <UpdateItem id={i.id} />
@@ -69,6 +72,7 @@ export default async function ItemsTable({
             </thead>
             <tbody className="bg-white">
               {items?.map((i) => (
+                <>
                 <tr
                   key={i.id}
                   className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
@@ -85,11 +89,17 @@ export default async function ItemsTable({
                     {i.summary}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    <button className="rounded-md border p-2 bg-white hover:bg-gray-200">
-                      <ChevronRightIcon className="w-4" />
-                    </button>
+                    {state === i.id ? (
+                      <button onClick={() => changeState(i.id)} className="rounded-md border p-2 bg-white hover:bg-gray-200">
+                        <ChevronDownIcon className="w-4" />
+                      </button>
+                      ):(
+                        <button onClick={() => changeState(i.id)} className="rounded-md border p-2 bg-white hover:bg-gray-200">
+                          <ChevronRightIcon className="w-4" />
+                        </button>
+                      )}
                   </td>
-                  {session.userId.localeCompare(id) == 0 ? (
+                  {idSession.localeCompare(idUser) == 0 ? (
                     <td className="whitespace-nowrap py-3 pl-6 pr-3">
                       <div className="flex justify-end gap-3">
                         <UpdateItem id={i.id} />
@@ -100,6 +110,14 @@ export default async function ItemsTable({
                         <></>
                     )}
                 </tr>
+                {state === i.id && (
+                  <tr>
+                    <td>
+                      <ShowValues item={i} />
+                    </td>
+                  </tr>
+                )}
+                </>
               ))}
             </tbody>
           </table>

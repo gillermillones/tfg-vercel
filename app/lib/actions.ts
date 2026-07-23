@@ -10,7 +10,7 @@ import bcrypt from 'bcrypt';
 import { getIronSession, IronSession } from "iron-session";
 import { cookies } from "next/headers";
 import { sessionOptions, SessionData } from "@/app/lib/session";
-import { nameRepeated } from "@/app/lib/data";
+import { nameRepeated, emailRepeated } from "@/app/lib/data";
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 const FormSchema = z.object({
@@ -399,7 +399,11 @@ export async function registerUser(prevState: RegisterState, formData: FormData)
             message: 'Passwords do not match',
         };
     }
-
+    if (await emailRepeated(email)) {
+        return {
+            message: 'Email already in use',
+        };
+    }
     if (await nameRepeated(name)) {
         return {
             message: 'User name already in use',

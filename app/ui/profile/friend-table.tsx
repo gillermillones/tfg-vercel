@@ -5,12 +5,15 @@ import { Suspense } from 'react';
 import Pagination from '@/app/ui/pagination';
 import ItemsTable from '@/app/ui/items/table';
 import { ItemTableSkeleton } from '@/app/ui/skeletons';
-import { fetchItemPagesUserId } from '@/app/lib/data';
+import { fetchItemPagesUserId, fetchFilteredItemsUserId } from '@/app/lib/data';
+import { getSession } from '@/app/lib/actions';
 
 export default async function FriendProfileTable({ user }: { user: User }) {
     const query = '';
     const currentPage = 1;
+    const session = await getSession();
     const totalPages = await fetchItemPagesUserId(query, user.id);
+    const items = await fetchFilteredItemsUserId(query, currentPage, user.id);
 
   return (
     <div className="flex flex-col w-full justify-between">
@@ -26,7 +29,7 @@ export default async function FriendProfileTable({ user }: { user: User }) {
         </div>
         <h1 className={`${lusitana.className} mt-4 text-2xl`}>{user?.name}'s Public Files</h1>
         <Suspense key={query + currentPage} fallback={<ItemTableSkeleton />}>
-            <ItemsTable query={query} currentPage={currentPage} id={user.id}/>
+            <ItemsTable items={items} idSession={session.userId} idUser={user.id}/>
         </Suspense>
         <div className="mt-5 flex w-full justify-center">
             <Pagination totalPages={totalPages} />

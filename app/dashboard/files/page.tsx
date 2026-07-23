@@ -3,7 +3,7 @@ import Search from '@/app/ui/search';
 import { Suspense } from 'react';
 import { ItemTableSkeleton } from '@/app/ui/skeletons';
 import { CreateItem } from '@/app/ui/items/buttons';
-import { fetchItemPagesUserId } from '@/app/lib/data';
+import { fetchItemPagesUserId, fetchFilteredItemsUserId } from '@/app/lib/data';
 import { getSession } from '@/app/lib/actions';
 import Pagination from '@/app/ui/pagination';
 import ItemsTable from '@/app/ui/items/table';
@@ -24,6 +24,7 @@ export default async function Page(props: {
     const session = await getSession();
     const currentPage = Number(searchParams?.page) || 1;
     const totalPages = await fetchItemPagesUserId(query, session.userId);
+    const items = await fetchFilteredItemsUserId(query, currentPage, session.userId);
     
     return (
         <div className="w-full">
@@ -35,7 +36,7 @@ export default async function Page(props: {
                 <CreateItem />
             </div>
             <Suspense key={query + currentPage} fallback={<ItemTableSkeleton />}>
-                <ItemsTable query={query} currentPage={currentPage} id={session.userId}/>
+                <ItemsTable items={items} idSession={session.userId} idUser={session.userId}/>
             </Suspense>
             <div className="mt-5 flex w-full justify-center">
                 <Pagination totalPages={totalPages} />
