@@ -1,6 +1,7 @@
 import { UpdateItem, DeleteItem } from '@/app/ui/items/buttons';
 import { fetchFilteredItemsUserId } from '@/app/lib/data';
 import { getSession } from '@/app/lib/actions';
+import { ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 
 export default async function ItemsTable({
   query,
@@ -58,6 +59,9 @@ export default async function ItemsTable({
                 <th scope="col" className="px-3 py-5 font-medium">
                   File description
                 </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Values
+                </th>
                 <th scope="col" className="relative py-3 pl-6 pr-3">
                   <span className="sr-only">Edit</span>
                 </th>
@@ -79,6 +83,11 @@ export default async function ItemsTable({
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {i.summary}
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    <button className="rounded-md border p-2 bg-white hover:bg-gray-200">
+                      <ChevronRightIcon className="w-4" />
+                    </button>
                   </td>
                   {session.userId.localeCompare(id) == 0 ? (
                     <td className="whitespace-nowrap py-3 pl-6 pr-3">

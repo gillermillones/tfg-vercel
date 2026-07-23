@@ -24,7 +24,7 @@ export default async function FriendProfileTable({ user }: { user: User }) {
             <h2>Email: {user?.email}</h2>
             <h2>User ID:{user?.id}</h2>
         </div>
-        <h1 className={`${lusitana.className} text-2xl`}>{user?.name}'s Public Files</h1>
+        <h1 className={`${lusitana.className} mt-4 text-2xl`}>{user?.name}'s Public Files</h1>
         <Suspense key={query + currentPage} fallback={<ItemTableSkeleton />}>
             <ItemsTable query={query} currentPage={currentPage} id={user.id}/>
         </Suspense>

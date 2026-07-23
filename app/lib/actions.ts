@@ -10,6 +10,7 @@ import bcrypt from 'bcrypt';
 import { getIronSession, IronSession } from "iron-session";
 import { cookies } from "next/headers";
 import { sessionOptions, SessionData } from "@/app/lib/session";
+import { nameRepeated } from "@/app/lib/data";
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 const FormSchema = z.object({
@@ -194,7 +195,7 @@ export async function createItem(prevState: ItemState, formData: FormData) {
     const validatedFields = CreateItem.safeParse({
         name: formData.get('name'),
         extension: formData.get('extension'),
-        summary: formData.get('desc'),
+        summary: formData.get('summary'),
         description: formData.get('description'),
         quality: formData.get('quality'),
         capacity: formData.get('capacity'),
@@ -396,6 +397,12 @@ export async function registerUser(prevState: RegisterState, formData: FormData)
     if (password.localeCompare(password2) != 0) {
         return {
             message: 'Passwords do not match',
+        };
+    }
+
+    if (await nameRepeated(name)) {
+        return {
+            message: 'User name already in use',
         };
     }
 

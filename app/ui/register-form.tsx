@@ -25,7 +25,7 @@ export default function RegisterForm() {
     <form action={formAction} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8" aria-describedby='general-error'>
         <h1 className={`${lusitana.className} mb-3 text-2xl`}>
-          Please register to continue
+          Por favor, registrate para continuar
         </h1>
         <div className="w-full">
             <div>
@@ -33,7 +33,7 @@ export default function RegisterForm() {
                 className="mb-3 mt-5 block text-xs font-medium text-gray-900"
                 htmlFor="name"
                 >
-                    User Name
+                    Nombre de usuario
                 </label>
                 <div className="relative">
                     <input
@@ -61,7 +61,7 @@ export default function RegisterForm() {
                     className="mb-3 mt-5 block text-xs font-medium text-gray-900"
                     htmlFor="email"
                 >
-                    Email
+                    Correo electronico
                 </label>
                 <div className="relative">
                     <input
@@ -89,7 +89,7 @@ export default function RegisterForm() {
                     className="mb-3 mt-5 block text-xs font-medium text-gray-900"
                     htmlFor="password"
                 >
-                    Password
+                    Contraseña
                 </label>
                 <div className="relative">
                     <input
@@ -118,7 +118,7 @@ export default function RegisterForm() {
                     className="mb-3 mt-5 block text-xs font-medium text-gray-900"
                     htmlFor="password2"
                 >
-                    Repeat Password
+                    Repite la contraseña
                 </label>
                 <div className="relative">
                     <input
@@ -145,7 +145,7 @@ export default function RegisterForm() {
         </div>
         <input type="hidden" name="redirectTo" value={callbackUrl} />
         <Button className="mt-4 w-full">
-          Sign Up <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
+          Registrate <ArrowRightIcon className="ml-auto h-5 w-5 text-gray-50" />
         </Button>
         <div id="general-error" aria-live="polite" aria-atomic="true">
           {state.message ?
