@@ -275,7 +275,11 @@ export async function emailRepeated(email: string) {
 
 export async function fetchFriendNumber() {
   try{
-    const friendNum = await sql`SELECT COUNT(*) FROM friends`;
+    const friendNum = await sql`
+      SELECT COUNT(*) 
+      FROM friends
+      WHERE friends.accepted = true
+    `;
     const fNum = Number(friendNum[0].count);
 
     return fNum;

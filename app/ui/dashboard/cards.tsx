@@ -20,8 +20,8 @@ export default async function CardWrapper() {
   return (
     <>
       <Card title="Number of users" value={userNum} type="users" />
-      <Card title="Number of files" value={friendNum} type="files" />
-      <Card title="Users connected" value={itemNum} type="friends" />
+      <Card title="Number of files" value={itemNum} type="files" />
+      <Card title="Users connected" value={friendNum} type="friends" />
     </>
   );
 }
