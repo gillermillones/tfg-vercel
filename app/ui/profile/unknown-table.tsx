@@ -10,7 +10,7 @@ export default async function UnknownProfileTable({ user, requested }: { user: U
             <h1 className={`${lusitana.className} text-2xl`}>{user?.name}'s Profile Page</h1>
                 {requested ? (
                     <div className="flex justify-end gap-2">
-                        <p>Already sent request</p>
+                        <p className="pt-1">Already sent request</p>
                         <RemoveFriend id={user.id} />
                     </div>
                 ):(

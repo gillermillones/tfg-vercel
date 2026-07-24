@@ -1,10 +1,11 @@
 'use client'
 
 import { UpdateItem, DeleteItem } from '@/app/ui/items/buttons';
-import { ChevronRightIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
+import { ChevronRightIcon, ChevronDownIcon, DownloadIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react'
 import ShowValues from '@/app/ui/items/show-values';
 import { ItemData } from '@/app/lib/definitions';
+import generateXml from '@/app/lib/export-xml';
 
 export default function ItemsTable({
   items,
@@ -17,6 +18,15 @@ export default function ItemsTable({
 }) {
   const [state, setState] = useState<string | null>(null);
   const changeState = (itemId : string) => {setState(state === itemId ? null : itemId)}
+
+  const download = async (id: string) => {
+    const xmlData = await generateXml(id);
+    const a = document.createElement("a");
+    a.href = xmlData;
+    a.download = "item.xml";
+    a.click();
+    a.remove();
+  };
 
   return (
     <div className="mt-6 flow-root">
@@ -102,6 +112,9 @@ export default function ItemsTable({
                   {idSession.localeCompare(idUser) == 0 ? (
                     <td className="whitespace-nowrap py-3 pl-6 pr-3">
                       <div className="flex justify-end gap-3">
+                        <button onClick={() => download(i.id)} className="rounded-md border p-2 bg-white hover:bg-gray-200">
+                          <DownloadIcon />
+                        </button>
                         <UpdateItem id={i.id} />
                         <DeleteItem id={i.id} />
                       </div>
