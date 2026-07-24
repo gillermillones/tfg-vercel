@@ -197,20 +197,20 @@ export async function getSession() {
 
 export async function searchUserByName(prevState: SimpleState, formData: FormData) {
     const name = <string>formData.get('username');
+    let user;
   try {
-    const user = await fetchUserByName(name);
+    user = await fetchUserByName(name);
     if(!user){
         return {
             message: 'No user matches your search',
         };
     }
-
-    redirect('/dashboard/profile' + user.id);
   } catch (error) {
     return {
         message: 'Search error',
     };
   }
+  redirect('/dashboard/profile/' + user.id);
 }
 
 export async function createItem(prevState: ItemState, formData: FormData) {
