@@ -10,3 +10,4 @@ postgres
 vercel
 zod
 clsx
+use-debounce
