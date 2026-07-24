@@ -75,9 +75,13 @@ export default function ItemsTable({
                 <th scope="col" className="px-3 py-5 font-medium">
                   Values
                 </th>
-                <th scope="col" className="relative py-3 pl-6 pr-3">
-                  <span className="sr-only">Edit</span>
-                </th>
+                {idSession.localeCompare(idUser) == 0 ? (
+                  <th scope="col" className="relative py-3 pl-6 pr-3">
+                    <span className="sr-only">Actions</span>
+                  </th>
+                  ):(
+                        <></>
+                    )}
               </tr>
             </thead>
             <tbody className="bg-white">
