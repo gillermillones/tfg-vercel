@@ -1,7 +1,7 @@
 'use client'
 
 import { UpdateItem, DeleteItem } from '@/app/ui/items/buttons';
-import { ChevronRightIcon, ChevronDownIcon, DownloadIcon } from '@heroicons/react/24/outline';
+import { ChevronRightIcon, ChevronDownIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react'
 import ShowValues from '@/app/ui/items/show-values';
 import { ItemData } from '@/app/lib/definitions';
@@ -113,7 +113,7 @@ export default function ItemsTable({
                     <td className="whitespace-nowrap py-3 pl-6 pr-3">
                       <div className="flex justify-end gap-3">
                         <button onClick={() => download(i.id)} className="rounded-md border p-2 bg-white hover:bg-gray-200">
-                          <DownloadIcon />
+                          <ArrowDownTrayIcon className="w-4" />
                         </button>
                         <UpdateItem id={i.id} />
                         <DeleteItem id={i.id} />
