@@ -1,32 +1,27 @@
-import { fetchCardData } from '@/app/lib/data';
+import { fetchFriendNumber, fetchUserNumber, fetchItemNumber } from '@/app/lib/data';
 import {
-  BanknotesIcon,
-  ClockIcon,
+  FolderOpenIcon,
   UserGroupIcon,
-  InboxIcon,
+  HeartIcon,
 } from '@heroicons/react/24/outline';
 import { lusitana } from '@/app/ui/fonts';
 
 const iconMap = {
-  collected: BanknotesIcon,
-  customers: UserGroupIcon,
-  pending: ClockIcon,
-  invoices: InboxIcon,
+  files: FolderOpenIcon,
+  users: UserGroupIcon,
+  friends: HeartIcon,
 };
 
 export default async function CardWrapper() {
-  const { numberOfCustomers, numberOfInvoices, totalPaidInvoices, totalPendingInvoices } = await fetchCardData();
+  const userNum = await fetchUserNumber();
+  const friendNum = await fetchFriendNumber();
+  const itemNum = await fetchItemNumber();
 
   return (
     <>
-      <Card title="Collected" value={totalPaidInvoices} type="collected" />
-      <Card title="Pending" value={totalPendingInvoices} type="pending" />
-      <Card title="Total Invoices" value={numberOfInvoices} type="invoices" />
-      <Card
-        title="Total Customers"
-        value={numberOfCustomers}
-        type="customers"
-      />
+      <Card title="Number of users" value={userNum} type="users" />
+      <Card title="Number of files" value={friendNum} type="files" />
+      <Card title="Users connected" value={itemNum} type="friends" />
     </>
   );
 }
@@ -38,7 +33,7 @@ export function Card({
 }: {
   title: string;
   value: number | string;
-  type: 'invoices' | 'customers' | 'pending' | 'collected';
+  type: 'users' | 'friends' | 'files';
 }) {
   const Icon = iconMap[type];
 
@@ -48,10 +43,7 @@ export function Card({
         {Icon ? <Icon className="h-5 w-5 text-gray-700" /> : null}
         <h3 className="ml-2 text-sm font-medium">{title}</h3>
       </div>
-      <p
-        className={`${lusitana.className}
-          truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}
-      >
+      <p className={`${lusitana.className} truncate rounded-xl bg-white px-4 py-8 text-center text-2xl`}>
         {value}
       </p>
     </div>

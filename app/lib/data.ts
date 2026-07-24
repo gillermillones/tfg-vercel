@@ -212,6 +212,17 @@ export async function fetchFilteredCustomers(query: string) {
   }
 }
 
+export async function fetchUserNumber() {
+  try{
+    const userNum = sql`SELECT COUNT(*) FROM users`;
+    
+    return userNum;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Can not fetch user number');
+  }
+}
+
 export async function fetchUserByName(name: string) {
   try {
     const user = await sql<User[]>`
@@ -258,6 +269,17 @@ export async function emailRepeated(email: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Can not check email availability');
+  }
+}
+
+export async function fetchFriendNumber() {
+  try{
+    const friendNum = sql`SELECT COUNT(*) FROM friends`;
+    
+    return friendNum;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Can not fetch friend number');
   }
 }
 
@@ -344,6 +366,17 @@ export async function areWeRequested(id1: string, id2: string) {
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Failed to prove friendship.');
+  }
+}
+
+export async function fetchItemNumber() {
+  try{
+    const itemNum = sql`SELECT COUNT(*) FROM data`;
+    
+    return itemNum;
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Can not fetch item number');
   }
 }
 

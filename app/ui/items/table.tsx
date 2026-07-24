@@ -23,7 +23,7 @@ export default function ItemsTable({
     const xmlData = await generateXml(id);
     const a = document.createElement("a");
     a.href = xmlData;
-    a.download = "item.xml";
+    a.download = id + ".xml";
     a.click();
     a.remove();
   };
