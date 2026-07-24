@@ -215,8 +215,9 @@ export async function fetchFilteredCustomers(query: string) {
 export async function fetchUserNumber() {
   try{
     const userNum = sql`SELECT COUNT(*) FROM users`;
-    
-    return userNum;
+    const uNum = Number(userNum[0].count);
+
+    return uNum;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Can not fetch user number');
@@ -275,8 +276,9 @@ export async function emailRepeated(email: string) {
 export async function fetchFriendNumber() {
   try{
     const friendNum = sql`SELECT COUNT(*) FROM friends`;
-    
-    return friendNum;
+    const fNum = Number(friendNum[0].count);
+
+    return fNum;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Can not fetch friend number');
@@ -372,8 +374,9 @@ export async function areWeRequested(id1: string, id2: string) {
 export async function fetchItemNumber() {
   try{
     const itemNum = sql`SELECT COUNT(*) FROM data`;
-    
-    return itemNum;
+    const iNum = Number(itemNum[0].count);
+
+    return iNum;
   } catch (error) {
     console.error('Database Error:', error);
     throw new Error('Can not fetch item number');
