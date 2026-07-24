@@ -199,13 +199,13 @@ export async function searchUserByName(prevState: SimpleState, formData: FormDat
     const name = <string>formData.get('username');
   try {
     const user = await fetchUserByName(name);
-    if(!user[0]){
+    if(!user){
         return {
             message: 'No user matches your search',
         };
     }
 
-    redirect('/dashboard/profile' + user[0].id);
+    redirect('/dashboard/profile' + user.id);
   } catch (error) {
     return {
         message: 'Search error',
