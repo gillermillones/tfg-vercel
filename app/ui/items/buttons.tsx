@@ -48,7 +48,7 @@ export function DeleteItem({ id }: { id: string }) {
         className="rounded-md border p-2 bg-red-400 hover:bg-red-500"
       >
         <span className="sr-only">Delete</span>
-        <TrashIcon className="w-4" />
+        <TrashIcon className="w-5" />
       </button>
     </form>
   );

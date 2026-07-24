@@ -114,4 +114,13 @@ export type ItemData = {
   operable: number;
   av_accessible: number;
   text_accessible: number;
+  date: string;
 }
+
+export type LatestItem = {
+  id: string;
+  name: string;
+  extension: string;
+  date: string;
+  username: string;
+};

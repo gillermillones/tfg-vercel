@@ -101,11 +101,11 @@ export default function ItemsTable({
                   <td className="whitespace-nowrap px-3 py-3">
                     {state === i.id ? (
                       <button onClick={() => changeState(i.id)} className="rounded-md border p-2 bg-white hover:bg-gray-200">
-                        <ChevronDownIcon className="w-4" />
+                        <ChevronDownIcon className="w-5" />
                       </button>
                       ):(
                         <button onClick={() => changeState(i.id)} className="rounded-md border p-2 bg-white hover:bg-gray-200">
-                          <ChevronRightIcon className="w-4" />
+                          <ChevronRightIcon className="w-5" />
                         </button>
                       )}
                   </td>
@@ -113,7 +113,7 @@ export default function ItemsTable({
                     <td className="whitespace-nowrap py-3 pl-6 pr-3">
                       <div className="flex justify-end gap-3">
                         <button onClick={() => download(i.id)} className="rounded-md border p-2 bg-white hover:bg-gray-200">
-                          <ArrowDownTrayIcon className="w-4" />
+                          <ArrowDownTrayIcon className="w-5" />
                         </button>
                         <UpdateItem id={i.id} />
                         <DeleteItem id={i.id} />

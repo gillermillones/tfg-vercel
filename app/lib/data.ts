@@ -5,7 +5,7 @@ import {
   ItemData,
   InvoiceForm,
   InvoicesTable,
-  LatestInvoiceRaw,
+  LatestItem,
   Revenue,
   User,
 } from './definitions';
@@ -24,23 +24,22 @@ export async function fetchRevenue() {
   }
 }
 
-export async function fetchLatestInvoices() {
+export async function fetchLatestItems() {
   try {
-    const data = await sql<LatestInvoiceRaw[]>`
-      SELECT invoices.amount, customers.name, customers.image_url, customers.email, invoices.id
-      FROM invoices
-      JOIN customers ON invoices.customer_id = customers.id
-      ORDER BY invoices.date DESC
+    const data = await sql<LatestItem[]>`
+      SELECT data.id, data.name, data.extension, data.date, users.name
+      FROM data
+      JOIN users ON data.user_id = users.id
+      ORDER BY data.date DESC
       LIMIT 5`;
 
-    const latestInvoices = data.map((invoice) => ({
-      ...invoice,
-      amount: formatCurrency(invoice.amount),
+    const latestItems = data.map((item) => ({
+      ...item,
     }));
-    return latestInvoices;
+    return latestItems;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Failed to fetch the latest invoices.');
+    throw new Error('Failed to fetch the latest items');
   }
 }
 

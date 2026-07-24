@@ -50,13 +50,14 @@ const ItemsFormSchema = z.object({
     operable: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
     av_accessible: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
     text_accessible: z.enum(['1', '2', '3', '4', '5'], {message: 'Please select a value',}).transform(Number),
+    date: z.string(),
 });
 
 const CreateInvoice = FormSchema.omit({ id: true, date: true });
 const UpdateInvoice = FormSchema.omit({ id: true, date: true });
 const RegisterUser = RegisterFormSchema.omit({ id: true });
-const CreateItem = ItemsFormSchema.omit({ id: true, user_id: true });
-const UpdateItem = ItemsFormSchema.omit({ id: true, user_id: true });
+const CreateItem = ItemsFormSchema.omit({ id: true, user_id: true, date: true });
+const UpdateItem = ItemsFormSchema.omit({ id: true, user_id: true, date: true });
 
 export type State = {
   errors?: {
