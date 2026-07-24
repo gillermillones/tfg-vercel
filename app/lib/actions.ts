@@ -10,7 +10,7 @@ import bcrypt from 'bcrypt';
 import { getIronSession, IronSession } from "iron-session";
 import { cookies } from "next/headers";
 import { sessionOptions, SessionData } from "@/app/lib/session";
-import { nameRepeated, emailRepeated } from "@/app/lib/data";
+import { nameRepeated, emailRepeated, fetchUserByName } from "@/app/lib/data";
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 const FormSchema = z.object({
@@ -64,6 +64,10 @@ export type State = {
     amount?: string[];
     status?: string[];
   };
+  message?: string | null;
+};
+
+export type SimpleState = {
   message?: string | null;
 };
 
@@ -189,6 +193,24 @@ export async function getSession() {
     );
 
     return session;
+}
+
+export async function searchUserByName(prevState: SimpleState, formData: FormData) {
+    const name = <string>formData.get('username');
+  try {
+    const user = await fetchUserByName(name);
+    if(!user[0]){
+        return {
+            message: 'No user matches your search',
+        };
+    }
+
+    redirect('/dashboard/profile' + user[0].id);
+  } catch (error) {
+    return {
+        message: 'Search error',
+    };
+  }
 }
 
 export async function createItem(prevState: ItemState, formData: FormData) {

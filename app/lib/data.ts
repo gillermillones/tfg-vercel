@@ -213,6 +213,21 @@ export async function fetchFilteredCustomers(query: string) {
   }
 }
 
+export async function fetchUserByName(name: string) {
+  try {
+    const user = await sql<User[]>`
+      SELECT *
+      FROM users u
+      WHERE u.name = ${name}
+    `;
+
+    return user[0];
+  } catch (error) {
+    console.error('Database Error:', error);
+    throw new Error('Can not fetch user by name');
+  }
+}
+
 export async function nameRepeated(name: string) {
   try {
     const result = await sql<{ exists: boolean }[]>`
@@ -243,7 +258,7 @@ export async function emailRepeated(email: string) {
     return result[0].exists;
   } catch (error) {
     console.error('Database Error:', error);
-    throw new Error('Can not check user name availability');
+    throw new Error('Can not check email availability');
   }
 }
 
