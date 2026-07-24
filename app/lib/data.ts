@@ -27,7 +27,7 @@ export async function fetchRevenue() {
 export async function fetchLatestItems() {
   try {
     const data = await sql<LatestItem[]>`
-      SELECT data.id, data.name, data.extension, data.date, users.name
+      SELECT data.id, data.name, data.extension, data.date, users.name AS username
       FROM data
       JOIN users ON data.user_id = users.id
       ORDER BY data.date DESC

@@ -29,10 +29,10 @@ export default async function LatestItems() {
                 <div className="flex items-center">
                   <div className="min-w-0">
                     <p className="truncate text-sm font-semibold md:text-base">
-                      {item.name}{item.extension}
+                      File: {item.name}{item.extension}
                     </p>
                     <p className="hidden text-sm text-gray-500 sm:block">
-                      {item.username}
+                      User: {item.username}
                     </p>
                   </div>
                 </div>
