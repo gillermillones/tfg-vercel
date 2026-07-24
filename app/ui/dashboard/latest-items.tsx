@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { lusitana } from '@/app/ui/fonts';
 import { LatestItem } from '@/app/lib/definitions';
 import { fetchLatestItems } from '@/app/lib/data';
+import { formatDateToLocal } from '@/app/lib/utils';
 
 export default async function LatestItems() {
   const latestItems = await fetchLatestItems();
@@ -38,7 +39,7 @@ export default async function LatestItems() {
                 <p
                   className={`${lusitana.className} truncate text-sm font-medium md:text-base`}
                 >
-                  {item.date}
+                  {formatDateToLocal(item.date)}
                 </p>
               </div>
             );
