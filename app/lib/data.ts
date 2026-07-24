@@ -214,7 +214,7 @@ export async function fetchFilteredCustomers(query: string) {
 
 export async function fetchUserNumber() {
   try{
-    const userNum = sql`SELECT COUNT(*) FROM users`;
+    const userNum = await sql`SELECT COUNT(*) FROM users`;
     const uNum = Number(userNum[0].count);
 
     return uNum;
@@ -275,7 +275,7 @@ export async function emailRepeated(email: string) {
 
 export async function fetchFriendNumber() {
   try{
-    const friendNum = sql`SELECT COUNT(*) FROM friends`;
+    const friendNum = await sql`SELECT COUNT(*) FROM friends`;
     const fNum = Number(friendNum[0].count);
 
     return fNum;
@@ -373,7 +373,7 @@ export async function areWeRequested(id1: string, id2: string) {
 
 export async function fetchItemNumber() {
   try{
-    const itemNum = sql`SELECT COUNT(*) FROM data`;
+    const itemNum = await sql`SELECT COUNT(*) FROM data`;
     const iNum = Number(itemNum[0].count);
 
     return iNum;
